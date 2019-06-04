@@ -37,12 +37,18 @@ class Header extends Component {
                 q: userSearch
             }
         }).then(results => {
-            const showData = results.data
+            // const showData = results.data
+
+            const filteredData = results.data.filter(item => 
+                item.show.image != null)
+
+            console.log(filteredData)
 
             this.setState({
-                showsArray: showData
+                showsArray: filteredData
             })
 
+            // console.log(results.data)
             // console.log(this.state.showsArray)
         }).catch(error => {
             console.log('error')
@@ -65,7 +71,7 @@ class Header extends Component {
                         { this.state.showsArray.map((item) => {
                             return <img src={item.show.image.original}/>
                         }) }
-                        
+
                     </div>
                     <div className="listCreator">
 
