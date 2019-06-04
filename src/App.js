@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    
+    this.state = {
+      userInput: "",
+      userSearch: ""
+    }
+  }
+
+  handleChange = event => {
+    this.setState({
+      userInput: event.target.value
+    })
+  }
+
+  handleSearch = event => {
+    event.preventDefault();
+    const userQuery = this.state.userInput;
+    this.setState({
+      userSearch: userQuery 
+    }, () => {
+      this.searchShows(this.state.userSearch)
+    })
+  }
+
+  searchShows = (userSearch) => {
+    axios({
+      method: 'GET',
+      url: "http://api.tvmaze.com/search/shows",
+      dataResponse: 'json',
+      params: {
+        q: userSearch
+      }
+    }).then(results => {
+      console.log(results)
+    }).catch(error => {
+      console.log('error')
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <form action="">
+          <label htmlFor="searchBar"></label>
+          <input type="text" id="searchBar" onChange={this.handleChange}></input>
+          <input type="submit" onClick={this.handleSearch} />
+        </form>
+      </div>
+    );
+  }
 }
 
 export default App;
+
+
+
