@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
+class UserList extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+        }
+
+        console.log(props.showTitle)
+
+    }
+    
+    
+    render(){
+        return(
+            <p>{this.props.showTitle}</p>
+        )
+    }
+}
+
 class Header extends Component {
     constructor() {
         super();
@@ -16,6 +35,9 @@ class Header extends Component {
             showsInfo: {},
             // is the modal initially shown? no.
             isModalShown: false,
+
+            userTvShows: []
+            
         }
     }
 
@@ -68,18 +90,45 @@ class Header extends Component {
         const title = e.target.getAttribute("data-title");
         const id = e.target.getAttribute("data-id");
         const summary = e.target.getAttribute("data-summary");
+        const image = e.target.getAttribute("data-image");
 
         this.setState ({
             showsInfo: {
                 title,
                 id,
-                summary
-            }
+                summary,
+                image
+            },
         }, () => {
-            console.log(this.state.showsInfo);
+            this.handleDisplayModal();
         })
     }
 
+    handleDisplayModal = () => {
+        this.setState({
+            isModalShown:true
+        })
+    }
+
+    closeModal = (e) => {
+        e.preventDefault();
+        this.setState({
+            isModalShown: false
+        })
+    }
+
+    addToList = (e) => {
+        e.preventDefault();
+        const title = this.state.showsInfo.title
+
+        const titleArray = [...this.state.userTvShows]
+        
+        titleArray.push(title)
+
+        this.setState ({
+            userTvShows:titleArray
+        })
+    }
 
     render() {
         return (
@@ -100,18 +149,30 @@ class Header extends Component {
                                 data-id={item.show.id}
                                 data-summary={item.show.summary}
                                 data-title={item.show.name}
+                                data-image={item.show.image.original}
                                 onClick={this.showDetails}/>
                             </div>
                         }) }
 
                     </div>
                     {/* this is where we are going to append the modal on click? */}
-                    <div className="showModal">
-                        <h2>{this.state.showsInfo.title}</h2>
-                        <p>{this.state.showsInfo.summary}</p>
-                    </div>
-                    <div className="listCreator">
 
+                    {this.state.isModalShown ? (
+                        <div className="showModal">
+                            <h2>{this.state.showsInfo.title}</h2>
+                            <p>{this.state.showsInfo.summary}</p>
+                            <div className="modal-image">
+                                <img src={this.state.showsInfo.image} alt={this.state.showsInfo.title}/>
+                            </div>
+                            <button className="clickClose" onClick={this.closeModal}>X</button>
+                            <button className="clickAdd" onClick={this.addToList}>Add to List</button>
+                        </div>
+                        
+                    ) : null
+                    }
+                    
+                    <div className="listCreator">
+                        <UserList showTitle={this.state.userTvShows} />
                     </div>
                 </div>
             </header>
