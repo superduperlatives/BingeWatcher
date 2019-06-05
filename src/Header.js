@@ -7,15 +7,15 @@ class UserList extends Component {
         super(props)
         this.state = {
         }
-
         console.log(props.showTitle)
-
     }
-    
     
     render(){
         return(
-            <p>{this.props.showTitle}</p>
+            <div className="selectedTitles">
+                <p>{this.props.showTitle}</p>
+                <button className="Remove">Remove</button>
+            </div>
         )
     }
 }
