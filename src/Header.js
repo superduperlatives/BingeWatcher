@@ -6,8 +6,18 @@ class UserList extends Component {
     constructor(props){
         super(props)
         this.state = {
+            stateTitlesArr: []
         }
-        console.log(props.showTitle)
+
+        const showsArray = props.showTitle
+        const titleArray = [...this.state.stateTitlesArr]
+        titleArray.push(showsArray)
+        this.setState({stateTitlesArr: showsArray}), () => {
+            console.log(this.state.stateTitlesArr)
+
+        }
+
+      
     }
     
     render(){
