@@ -6,9 +6,16 @@ class Header extends Component {
         super();
 
         this.state = {
+            // binding out input
             userInput: "",
+            // storing our user's search input
             userSearch: "",
-            showsArray: []
+            // data gathered from API and shoved into this box
+            showsArray: [],
+            // this is where we're going to put all our gathered info of the show
+            showsInfo: {},
+            // is the modal initially shown? no.
+            isModalShown: false,
         }
     }
 
@@ -37,8 +44,6 @@ class Header extends Component {
                 q: userSearch
             }
         }).then(results => {
-            // const showData = results.data
-
             const filteredData = results.data.filter(item => 
                 item.show.image != null)
 
@@ -48,13 +53,32 @@ class Header extends Component {
                 showsArray: filteredData
             })
 
-            // console.log(results.data)
-            // console.log(this.state.showsArray)
         }).catch(error => {
             console.log('error')
         })
     }
 
+    // each click upon each show is re-updating the state.
+    showDetails = (e) => {
+        // onClick... go grab the value of these data?
+        // console.log(e.target.getAttribute("data-title"));
+        // console.log(e.target.getAttribute("data-id"));
+        // console.log(e.target.getAttribute("data-summary"));
+        
+        const title = e.target.getAttribute("data-title");
+        const id = e.target.getAttribute("data-id");
+        const summary = e.target.getAttribute("data-summary");
+
+        this.setState ({
+            showsInfo: {
+                title,
+                id,
+                summary
+            }
+        }, () => {
+            console.log(this.state.showsInfo);
+        })
+    }
 
 
     render() {
@@ -67,11 +91,24 @@ class Header extends Component {
                 </form>
                 <div className="showLists">
                     <div className="showResults">
-
-                        { this.state.showsArray.map((item) => {
-                            return <img src={item.show.image.original}/>
+                        {/* map through the showsArray and for each item... we want to grab the data/ attributes...below? */}
+                        { this.state.showsArray.map((item, key) => {
+                            return <div key={item.show.id} className="showPoster">
+                            <img 
+                                src={item.show.image.original} 
+                                alt="" 
+                                data-id={item.show.id}
+                                data-summary={item.show.summary}
+                                data-title={item.show.name}
+                                onClick={this.showDetails}/>
+                            </div>
                         }) }
 
+                    </div>
+                    {/* this is where we are going to append the modal on click? */}
+                    <div className="showModal">
+                        <h2>{this.state.showsInfo.title}</h2>
+                        <p>{this.state.showsInfo.summary}</p>
                     </div>
                     <div className="listCreator">
 
