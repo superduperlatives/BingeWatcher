@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase from './firebase.js'
+
 
 
 class UserList extends Component {
@@ -42,7 +44,9 @@ class Header extends Component {
             // is the modal initially shown? no.
             isModalShown: false,
 
-            userTvShows: []
+            userTvShows: [],
+
+            userSubmitTitle: ""
             
         }
     }
@@ -139,9 +143,7 @@ class Header extends Component {
     removeShow = (showToRemove) => {
         const showTitle = [...this.state.userTvShows]
 
-        if (showToRemove > -1) {
             showTitle.splice(showToRemove, 1)
-        }
         
 
         this.setState ({
@@ -150,6 +152,33 @@ class Header extends Component {
         
         console.log(this.state.userTvShows)
 
+    }
+
+    handleSubmitChange = event => {
+        this.setState({
+            userSubmitTitle: event.target.value
+        })
+    }        
+    
+
+    submitList = (e) => {
+        e.preventDefault()
+        
+        const userChosenTitle = this.state.userSubmitTitle;
+
+        const userConfirmedList = {
+            title: userChosenTitle,
+            userList: this.state.userTvShows
+        }
+
+        const dbRef = firebase.database().ref();
+        // console.log('dbref=', dbRef)
+        // console.log('userShows', this.state.userTvShows)
+        dbRef.push(userConfirmedList)
+
+        this.setState({
+            userTvShows: []
+        })
     }
 
     render() {
@@ -194,11 +223,17 @@ class Header extends Component {
                     }
                     
                     <div className="listCreator">
-                        <UserList showTitle={this.state.userTvShows} removeShow = {this.removeShow} />
+                        <form action="" onSubmit={this.submitList}>
+                            <label htmlFor="userListTitle"></label>
+                            <input type="text" id="userListTitle" onChange={this.handleSubmitChange}/>
+                            <UserList showTitle={this.state.userTvShows} removeShow={this.removeShow} />
+                            <input type="submit" value="Submit List"/>
+                        </form>
                     </div>
 
                 </div>
             </header>
+
         );
     }
 }
