@@ -4,20 +4,26 @@ import axios from 'axios';
 
 class UserList extends Component {
     
-    render(){
-        return(
-            <div className="selectedTitles">
-                {this.props.showTitle.map((show, index) => {
-                    return (
-                        <li key={index}>
-                            <p>show</p>
-                            <button className="Remove">Remove</button>
-                        </li>
-                    )
-                })}
-            </div>
-        )
-    }
+        render(){
+            return(
+                <div className="selectedTitles">
+                    {this.props.showTitle.map((show, index) => {
+                        return (
+                            <li key={index}>
+                                <p>{show}</p>
+                                <button className="Remove" onClick={()=> this.props.removeShow(index)} value={show} >Remove</button>
+                            </li>
+                        )
+                    })}
+                </div>
+            )
+        }
+    // removeSelectedShow = (event) => {
+    //     preventDefault(event);
+    //     console.log("remove selected show TEST")
+    //     const buttonTarget = event.target.value
+    //     console.log(buttonTarget)
+    // }
 }
 
 class Header extends Component {
@@ -130,6 +136,18 @@ class Header extends Component {
         })
     }
 
+    removeShow = (showToRemove) => {
+        const showTitle = [...this.state.userTvShows]
+        showTitle.splice(showToRemove, showToRemove)
+
+        this.setState ({
+            userTvShows: showTitle
+        })
+        
+        console.log(this.state.userTvShows)
+
+    }
+
     render() {
         return (
             <header className="wrapper">
@@ -172,8 +190,9 @@ class Header extends Component {
                     }
                     
                     <div className="listCreator">
-                        <UserList showTitle={this.state.userTvShows} />
+                        <UserList showTitle={this.state.userTvShows} removeShow = {this.removeShow} />
                     </div>
+
                 </div>
             </header>
         );
