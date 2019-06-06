@@ -3,28 +3,18 @@ import axios from 'axios';
 
 
 class UserList extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            stateTitlesArr: []
-        }
-
-        const showsArray = props.showTitle
-        const titleArray = [...this.state.stateTitlesArr]
-        titleArray.push(showsArray)
-        this.setState({stateTitlesArr: showsArray}), () => {
-            console.log(this.state.stateTitlesArr)
-
-        }
-
-      
-    }
     
     render(){
         return(
             <div className="selectedTitles">
-                <p>{this.props.showTitle}</p>
-                <button className="Remove">Remove</button>
+                {this.props.showTitle.map((show, index) => {
+                    return (
+                        <li key={index}>
+                            <p>show</p>
+                            <button className="Remove">Remove</button>
+                        </li>
+                    )
+                })}
             </div>
         )
     }
