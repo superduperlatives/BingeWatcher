@@ -138,7 +138,11 @@ class Header extends Component {
 
     removeShow = (showToRemove) => {
         const showTitle = [...this.state.userTvShows]
-        showTitle.splice(showToRemove, showToRemove)
+
+        if (showToRemove > -1) {
+            showTitle.splice(showToRemove, 1)
+        }
+        
 
         this.setState ({
             userTvShows: showTitle
