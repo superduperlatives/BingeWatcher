@@ -49,7 +49,7 @@ class Main extends Component {
                             <ul>
                                 {list.userListObject.userList.map((show, index)=> {
                                     return(
-                                        <li key={index}>{show}</li>
+                                        <li key={index}>{show.title}</li>
                                     )
                                 })}
                             </ul>

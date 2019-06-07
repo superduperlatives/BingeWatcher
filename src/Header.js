@@ -6,26 +6,21 @@ import firebase from './firebase.js'
 
 class UserList extends Component {
     
-        render(){
-            return(
-                <div className="selectedTitles">
-                    {this.props.showTitle.map((show, index) => {
-                        return (
-                            <li key={index}>
-                                <p>{show.title}</p>
-                                <button className="Remove" onClick={()=> this.props.removeShow(index)} value={show} >Remove</button>
-                            </li>
-                        )
-                    })}
-                </div>
-            )
-        }
-    // removeSelectedShow = (event) => {
-    //     preventDefault(event);
-    //     console.log("remove selected show TEST")
-    //     const buttonTarget = event.target.value
-    //     console.log(buttonTarget)
-    // }
+    render(){
+        return(
+            <div className="selectedTitles">
+                {/* go into showTitle... map over it... for every show... add an index...? */}
+                {this.props.showTitle.map((show, index) => {
+                    return (
+                        <li key={index}>
+                            <p>{show.title}</p>
+                            <button className="Remove" onClick={()=> this.props.removeShow(index)}>Remove</button>
+                        </li>
+                    )
+                })}
+            </div>
+        )
+    }
 }
 
 class Header extends Component {
@@ -101,15 +96,13 @@ class Header extends Component {
         const id = e.target.getAttribute("data-id");
         const summary = e.target.getAttribute("data-summary");
         const image = e.target.getAttribute("data-image");
-        const value = e.target.getAttribute("value");
 
         this.setState ({
             showsInfo: {
                 title,
                 id,
                 summary,
-                image, 
-                value
+                image
             },
         }, () => {
             this.handleDisplayModal();
@@ -131,15 +124,11 @@ class Header extends Component {
 
     addToList = (e) => {
         e.preventDefault();
-        const title = this.state.showsInfo.title
-        const value = this.state.showsInfo.value
-
-        const info = { title: this.state.showsInfo.title, value:1}
-
-        const value = 1
-
-        const shows = {showTitle:title, showValue:value}
-        console.log(shows)
+        const showTitle = this.state.showsInfo.title
+        const showValue = 1
+        // we're grabbing shit from showTitle & showValue and shoving it into variable info
+        const info = { title: showTitle, value: showValue}
+    
         const titleArray = [...this.state.userTvShows]
         
         titleArray.push(info)
@@ -152,8 +141,8 @@ class Header extends Component {
 
     removeShow = (showToRemove) => {
         const showTitle = [...this.state.userTvShows]
-
-            showTitle.splice(showToRemove, 1)
+        
+        showTitle.splice(showToRemove)
         
 
         this.setState ({
@@ -210,7 +199,6 @@ class Header extends Component {
                                 data-id={item.show.id}
                                 data-summary={item.show.summary}
                                 data-title={item.show.name}
-                                data-value={0}
                                 data-image={item.show.image.original}
                                 onClick={this.showDetails}/>
                             </div>
