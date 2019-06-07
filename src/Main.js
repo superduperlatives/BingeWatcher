@@ -6,7 +6,7 @@ class Main extends Component {
         super()
 
         this.state = {
-            displayList: [],
+            displayList: []
         }
     }
 
@@ -41,18 +41,35 @@ class Main extends Component {
     // create a function to update the values on button click by using .update()
     // we need to make it where its on click ADD +1 to it
     valueIncrease = (event) => {
+        // variable copy makes a copy of the current state of display list
+        const copy = [...this.state.displayList]
+        // variable target is the value of clicked on title???
         const target = event.target.value
         // console.log(target)
 
         // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .overHere. Once we find the element of .overHere... get the attribute of data-id and return a value to us?
-        const parentDiv = event.target.closest('.overHere').getAttribute('data-id')
-        // console.log(parentDiv)
+        const parentDiv = event.target.closest('.overHere').getAttribute('data-id');
+
+        // grabs the vote value
+        let currentVoteValue = copy[parentDiv].userListObject.userList[target].value;
         
-        console.log(this.state.displayList[parentDiv].userListObject.userList[target])
+        // increments the vote value by 1 and saves its in counter
+        const counter  = currentVoteValue + 1;
+
+        // we're taking the current state of the display list's vote value and updates it with counter?
+        copy[parentDiv].userListObject.userList[target].value = counter;
+        
+        // so now we update this.state.displayList with the updated copy data. cool.
+        this.setState({
+            displayList: copy
+        })
+
+
 
         // target the object thats holding that value.
         // console.log(target, "+1")
     }
+
 
     render(){
         return(
