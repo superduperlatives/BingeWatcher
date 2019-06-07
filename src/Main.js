@@ -21,9 +21,11 @@ class Main extends Component {
             const newState = [];
             // response from firebase, which will be shoved into the data variable?
             const data = response.val()
+    
 
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
+                console.log(key)
                 newState.push({
                     id: key,
                     userListObject: data[key]
@@ -41,6 +43,10 @@ class Main extends Component {
     // create a function to update the values on button click by using .update()
     // we need to make it where its on click ADD +1 to it
     valueIncrease = (event) => {
+        const dbRef = firebase.database().ref();
+
+        
+        
         // variable copy makes a copy of the current state of display list
         const copy = [...this.state.displayList]
         // variable target is the value of clicked on title???
@@ -62,8 +68,22 @@ class Main extends Component {
         // so now we update this.state.displayList with the updated copy data. cool.
         this.setState({
             displayList: copy
-        })
+        }
+        // , ()=>{
+        //         dbRef.once('value', (response) => {
+        //             const data=response.val()
 
+        //             for (let key in data) {
+        //                 this.state.displayList()
+        //             }
+        //         })
+        // }
+        )
+
+
+            // dbRef.update(this.state.displayList[parentDiv].userListObject.userList[target].value)
+
+        
 
 
         // target the object thats holding that value.
@@ -79,23 +99,27 @@ class Main extends Component {
                         <div 
                         className="overHere" 
                         data-id={index} 
-                        key={index}>
+                        key={list.id}>
                             <h3>{list.userListObject.title}</h3>
                             <ul>
                                 {list.userListObject.userList.map((show, index)=> {
                                     return(
                                         <li key={index}>
                                             <h3>{show.title}</h3>
-                                            <button 
-                                                className="upvote"
-                                                onClick={this.valueIncrease}
-                                                onChange={this.handleYayListen}
-                                                value={index}>Love
-                                            </button>
-                                            <button 
-                                                className="downvote"
-                                                onClick={this.handleNayChange}>Hate
-                                            </button>
+                                            <div>
+                                                <p>{show.value}</p>
+                                                <button
+                                                    className="upvote"
+                                                    onClick={this.valueIncrease}
+                                                    value={index}>Love
+                                                </button>
+                                                <button
+                                                    className="downvote"
+                                                    onClick={this.handleNayChange}>Hate
+                                                </button>
+                                            </div>
+                                            
+                                            
                                         </li>
                                     )
                                 })}
