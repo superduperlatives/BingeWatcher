@@ -12,7 +12,7 @@ class UserList extends Component {
                     {this.props.showTitle.map((show, index) => {
                         return (
                             <li key={index}>
-                                <p>{show}</p>
+                                <p>{show.title}</p>
                                 <button className="Remove" onClick={()=> this.props.removeShow(index)} value={show} >Remove</button>
                             </li>
                         )
@@ -101,13 +101,15 @@ class Header extends Component {
         const id = e.target.getAttribute("data-id");
         const summary = e.target.getAttribute("data-summary");
         const image = e.target.getAttribute("data-image");
+        const value = e.target.getAttribute("value");
 
         this.setState ({
             showsInfo: {
                 title,
                 id,
                 summary,
-                image
+                image, 
+                value
             },
         }, () => {
             this.handleDisplayModal();
@@ -130,13 +132,17 @@ class Header extends Component {
     addToList = (e) => {
         e.preventDefault();
         const title = this.state.showsInfo.title
+        const value = this.state.showsInfo.value
+
+        const info = { title: this.state.showsInfo.title, value:1}
 
         const titleArray = [...this.state.userTvShows]
         
-        titleArray.push(title)
+        titleArray.push(info)
+        // titleArray.push(value.value)
 
         this.setState ({
-            userTvShows:titleArray
+            userTvShows: titleArray
         })
     }
 
@@ -200,6 +206,7 @@ class Header extends Component {
                                 data-id={item.show.id}
                                 data-summary={item.show.summary}
                                 data-title={item.show.name}
+                                data-value={0}
                                 data-image={item.show.image.original}
                                 onClick={this.showDetails}/>
                             </div>
