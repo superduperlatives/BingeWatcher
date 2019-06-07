@@ -87,11 +87,6 @@ class Header extends Component {
 
     // each click upon each show is re-updating the state.
     showDetails = (e) => {
-        // onClick... go grab the value of these data?
-        // console.log(e.target.getAttribute("data-title"));
-        // console.log(e.target.getAttribute("data-id"));
-        // console.log(e.target.getAttribute("data-summary"));
-        
         const title = e.target.getAttribute("data-title");
         const id = e.target.getAttribute("data-id");
         const summary = e.target.getAttribute("data-summary");
@@ -132,25 +127,21 @@ class Header extends Component {
         const titleArray = [...this.state.userTvShows]
         
         titleArray.push(info)
-        // titleArray.push(value.value)
 
         this.setState ({
             userTvShows: titleArray
         })
     }
 
+    // function to remove a specific show (one show at a time)
     removeShow = (showToRemove) => {
         const showTitle = [...this.state.userTvShows]
-        
-        showTitle.splice(showToRemove)
-        
 
+        showTitle.splice(showToRemove, 1)
+        
         this.setState ({
             userTvShows: showTitle
         })
-        
-        console.log(this.state.userTvShows)
-
     }
 
     handleSubmitChange = event => {
@@ -171,8 +162,7 @@ class Header extends Component {
         }
 
         const dbRef = firebase.database().ref();
-        // console.log('dbref=', dbRef)
-        // console.log('userShows', this.state.userTvShows)
+
         dbRef.push(userConfirmedList)
 
         this.setState({
@@ -180,7 +170,7 @@ class Header extends Component {
         })
     }
 
-    render() {
+    render () {
         return (
             <header className="wrapper">
                 <form action="">
@@ -191,49 +181,46 @@ class Header extends Component {
                 <div className="showLists">
                     <div className="showResults">
                         {/* map through the showsArray and for each item... we want to grab the data/ attributes...below? */}
-                        { this.state.showsArray.map((item, key) => {
+                        {this.state.showsArray.map((item, key) => {
                             return <div key={item.show.id} className="showPoster">
-                            <img 
-                                src={item.show.image.original} 
-                                alt="" 
-                                data-id={item.show.id}
-                                data-summary={item.show.summary}
-                                data-title={item.show.name}
-                                data-image={item.show.image.original}
-                                onClick={this.showDetails}/>
+                                <img
+                                    src={item.show.image.original}
+                                    alt=""
+                                    data-id={item.show.id}
+                                    data-summary={item.show.summary}
+                                    data-title={item.show.name}
+                                    data-image={item.show.image.original}
+                                    onClick={this.showDetails} />
                             </div>
-                        }) }
-
+                        })}
                     </div>
-                    {/* this is where we are going to append the modal on click? */}
 
+                    {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
                             <h2>{this.state.showsInfo.title}</h2>
                             <p>{this.state.showsInfo.summary}</p>
                             <div className="modal-image">
-                                <img src={this.state.showsInfo.image} alt={this.state.showsInfo.title}/>
+                                <img src={this.state.showsInfo.image} alt={this.state.showsInfo.title} />
                             </div>
                             <button className="clickClose" onClick={this.closeModal}>X</button>
                             <button className="clickAdd" onClick={this.addToList}>Add to List</button>
                         </div>
-                        
                     ) : null
                     }
-                    
+
                     <div className="listCreator">
+                        <UserList showTitle={this.state.userTvShows} removeShow={this.removeShow} />
+
                         <form action="" onSubmit={this.submitList}>
                             <label htmlFor="userListTitle"></label>
-                            <input type="text" id="userListTitle" onChange={this.handleSubmitChange}/>
-                            <UserList showTitle={this.state.userTvShows} removeShow={this.removeShow} />
-                            <input type="submit" value="Submit List"/>
+                            <input type="text" id="userListTitle" onChange={this.handleSubmitChange} />
+                            <input type="submit" value="Submit List" />
                         </form>
                     </div>
-
                 </div>
             </header>
-
-        );
+        )
     }
 }
 
