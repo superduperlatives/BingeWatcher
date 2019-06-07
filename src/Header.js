@@ -136,26 +136,18 @@ class Header extends Component {
 
         const info = { title: this.state.showsInfo.title, value:1}
 
-        const value = 0
+        const value = 1
 
         const shows = {showTitle:title, showValue:value}
         console.log(shows)
         const titleArray = [...this.state.userTvShows]
         
-<<<<<<< HEAD
         titleArray.push(info)
         // titleArray.push(value.value)
 
         this.setState ({
             userTvShows: titleArray
         })
-=======
-        // titleArray.push(title)
-
-        // this.setState ({
-        //     userTvShows:titleArray
-        // })
->>>>>>> 76ffb54731e9b959c8d3c750512ab79dd95f17ea
     }
 
     removeShow = (showToRemove) => {
