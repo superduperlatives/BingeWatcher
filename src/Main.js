@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js'
+import { send } from 'q';
 
 class Main extends Component {
     constructor(){
         super()
 
         this.state = {
-            displayList: []
+            displayList: [],
+            key:''
         }
     }
 
@@ -25,7 +27,6 @@ class Main extends Component {
 
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
-                console.log(key)
                 newState.push({
                     id: key,
                     userListObject: data[key]
@@ -36,6 +37,10 @@ class Main extends Component {
                 displayList: newState
             })
         })
+
+
+
+
     }
 
     // we need to find a way to go into the userList and for every index go into the value... set a default state to it? and then update that state everytime we click on it?
@@ -43,9 +48,6 @@ class Main extends Component {
     // create a function to update the values on button click by using .update()
     // we need to make it where its on click ADD +1 to it
     valueIncrease = (event) => {
-        const dbRef = firebase.database().ref();
-
-        
         
         // variable copy makes a copy of the current state of display list
         const copy = [...this.state.displayList]
@@ -55,7 +57,9 @@ class Main extends Component {
 
         // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .overHere. Once we find the element of .overHere... get the attribute of data-id and return a value to us?
         const parentDiv = event.target.closest('.overHere').getAttribute('data-id');
-
+        const keyValue = event.target.closest('.overHere').getAttribute('data-key');
+        
+        console.log(keyValue)
         // grabs the vote value
         let currentVoteValue = copy[parentDiv].userListObject.userList[target].value;
         
@@ -67,18 +71,28 @@ class Main extends Component {
         
         // so now we update this.state.displayList with the updated copy data. cool.
         this.setState({
-            displayList: copy
-        }
-        // , ()=>{
-        //         dbRef.once('value', (response) => {
-        //             const data=response.val()
+            displayList: copy,
+            key: keyValue
+        }, () => {
+            const dbRef = firebase.database().ref()
 
-        //             for (let key in data) {
-        //                 this.state.displayList()
-        //             }
-        //         })
-        // }
-        )
+            dbRef.once('value', (response) => {
+                const newData = response.val()
+
+                for (let key in newData) {
+                    if (key === keyValue) {
+                        dbRef.child(key).child('userList').child(parentDiv).update({
+                            value: this.state.displayList[parentDiv].userListObject.userList[target].value
+                        })
+                    }
+                }
+            })
+    
+        })
+        
+
+        
+    }
 
 
             // dbRef.update(this.state.displayList[parentDiv].userListObject.userList[target].value)
@@ -88,7 +102,7 @@ class Main extends Component {
 
         // target the object thats holding that value.
         // console.log(target, "+1")
-    }
+
 
 
     render(){
@@ -99,7 +113,7 @@ class Main extends Component {
                         <div 
                         className="overHere" 
                         data-id={index} 
-                        key={list.id}>
+                        data-key={list.id}>
                             <h3>{list.userListObject.title}</h3>
                             <ul>
                                 {list.userListObject.userList.map((show, index)=> {
