@@ -26,6 +26,7 @@ class Main extends Component {
     
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
+
                 newState.push({
                     id: key,
                     userListObject: data[key]
@@ -43,17 +44,22 @@ class Main extends Component {
     // create a function to update the values on button click by using .update()
     // we need to make it where its on click ADD +1 to it
     valueIncrease = (event) => {
+
+        const firebaseKey = event.target.closest('.completeList').getAttribute('data-key');
+        // console.log(firebaseKey);
+
+        
+        const dbRef = firebase.database().ref();
+
         
         // variable copy makes a copy of the current state of display list
         const copy = [...this.state.displayList]
         // variable target is the value of clicked on title
         const target = event.target.value
         // console.log(target)
-
-        // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .overHere. Once we find the element of .overHere... get the attribute of data-id and return a value to us?
-
-        const parentDiv = event.target.closest('.overHere').getAttribute('data-id');
-
+        // console.log(this.state.displayList)
+        // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .completeList. Once we find the element of .completeList... get the attribute of data-id and return a value to us?
+        const parentDiv = event.target.closest('.completeList').getAttribute('data-id');
         const keyValue = event.target.closest('.overHere').getAttribute('data-key');
         
         // grabs the vote value
@@ -93,26 +99,16 @@ class Main extends Component {
         
     }
 
-
-            // dbRef.update(this.state.displayList[parentDiv].userListObject.userList[target].value)
-
-        
-
-
-        // target the object thats holding that value.
-        // console.log(target, "+1")
-
-
-
     render(){
         return(
             <div>
                 {this.state.displayList.map((list, index) => {
                     return(
                         <div 
-                        className="overHere" 
+                        className="completeList" 
                         data-id={index} 
-                        data-key={list.id}>
+                        data-key={list.id}
+                        key={list.id}>
                             <h3>{list.userListObject.title}</h3>
                             <ul>
                                 {list.userListObject.userList.map((show, index)=> {
