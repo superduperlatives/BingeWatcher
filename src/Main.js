@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js'
-import { send } from 'q';
 
 class Main extends Component {
     constructor(){
@@ -15,15 +14,33 @@ class Main extends Component {
     // we do not need to add anything else in here?
     componentDidMount(){
         // variable created to reference into firebase
-        const dbRef = firebase.database().ref();
-
+        const dbRef = firebase.database().ref('userList/value');
+        console.log(dbRef)
         // on value change in firebase, pull down response from database
         dbRef.on('value', (response) => {
             // variable to pull data from firebase so we can shove it into newState's box
             const newState = [];
             // response from firebase, which will be shoved into the data variable?
             const data = response.val()
-    
+
+            // console.log(data);
+
+            // for (let object in data) {
+            //     console.log(data[object])
+
+            //     data[object].userList.sort((a, b) => {
+            //         if (a.value > b.value) return -1;
+            //         if (a.value < b.value) return 1;
+            //         return 0;
+            //     });
+                
+                
+            //     // console.log(data[object])
+            // }
+            
+
+
+
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
 
@@ -32,6 +49,20 @@ class Main extends Component {
                     userListObject: data[key]
                 })
             }
+
+            // console.log(newState)
+
+            // const sortedState = newState.map((item, index) => {
+            //     const sortedArray = item.userListObject.userList.sort((a, b) => {
+            //         if (a.value > b.value) return -1;
+            //         if (a.value < b.value) return 1;
+            //         return 0;
+            //     });
+            //     return sortedArray
+            // })
+
+            // console.log(sortedState)
+
             // we update the state so we can call it/ render it 
             this.setState({
                 displayList: newState

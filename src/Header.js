@@ -122,19 +122,25 @@ class Header extends Component {
 
     addToList = (e) => {
         e.preventDefault();
-        const showTitle = this.state.showsInfo.title
-        const showValue = 1
 
-        // we're grabbing shit from showTitle & showValue and shoving it into variable info
-        const info = { title: showTitle, value: showValue}
-        // copy of userTVshows to update
-        const titleArray = [...this.state.userTvShows]
+        if (this.state.userTvShows.length < 10) {
+            const showTitle = this.state.showsInfo.title
+            const showValue = 1
+
+            // we're grabbing shit from showTitle & showValue and shoving it into variable info
+            const info = { title: showTitle, value: showValue }
+            // copy of userTVshows to update
+            const titleArray = [...this.state.userTvShows]
+
+            titleArray.push(info)
+
+            this.setState({
+                userTvShows: titleArray
+            })
+        } else {
+            alert("You may only add up to 10 shows to your list!");
+        }
         
-        titleArray.push(info)
-
-        this.setState ({
-            userTvShows: titleArray
-        })
     }
 
     // function to remove a specific show (one show at a time) by index value
