@@ -49,8 +49,7 @@ class Main extends Component {
         // console.log(firebaseKey);
 
         
-        const dbRef = firebase.database().ref();
-
+        const dbRef = firebase.database().ref(); 
         
         // variable copy makes a copy of the current state of display list
         const copy = [...this.state.displayList]
@@ -60,7 +59,7 @@ class Main extends Component {
         // console.log(this.state.displayList)
         // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .completeList. Once we find the element of .completeList... get the attribute of data-id and return a value to us?
         const parentDiv = event.target.closest('.completeList').getAttribute('data-id');
-        const keyValue = event.target.closest('.overHere').getAttribute('data-key');
+        const keyValue = event.target.closest('.completeList').getAttribute('data-key');
         
         // grabs the vote value
         let currentVoteValue = copy[parentDiv].userListObject.userList[target].value;
@@ -85,8 +84,6 @@ class Main extends Component {
                         dbRef.child(key).child('userList').child(target).update({
                             value: this.state.displayList[parentDiv].userListObject.userList[target].value
                         })
-
-                        //hellllllllllllllllloooooo
                         
                     }
                     
@@ -97,6 +94,39 @@ class Main extends Component {
                 
         })
         
+    }
+
+    // exact same function as valueIncrease but decreases
+    valueDecrease = (event) => {
+        const firebaseKey = event.target.closest('.completeList').getAttribute('data-key');
+        const dbRef = firebase.database().ref();
+        const copy = [...this.state.displayList]
+        const target = event.target.value
+        const parentDiv = event.target.closest('.completeList').getAttribute('data-id');
+        const keyValue = event.target.closest('.completeList').getAttribute('data-key');
+        let currentVoteValue = copy[parentDiv].userListObject.userList[target].value;
+        
+        const counter = currentVoteValue - 1;
+
+        copy[parentDiv].userListObject.userList[target].value = counter;
+
+        this.setState({
+            displayList: copy,
+        }, () => {
+            const dbRef = firebase.database().ref()
+
+            dbRef.once('value', (response) => {
+                const newData = response.val()
+
+                for (let key in newData) {
+                    if (key === keyValue) {
+                        dbRef.child(key).child('userList').child(target).update({
+                            value: this.state.displayList[parentDiv].userListObject.userList[target].value
+                        })
+                    }
+                }
+            })
+        })
     }
 
     render(){
@@ -124,7 +154,8 @@ class Main extends Component {
                                                 </button>
                                                 <button
                                                     className="downvote"
-                                                    onClick={this.handleNayChange}>Hate
+                                                    onClick={this.valueDecrease}
+                                                    value={index}>Hate
                                                 </button>
                                             </div>
                                             
