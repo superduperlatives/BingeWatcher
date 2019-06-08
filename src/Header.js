@@ -5,7 +5,6 @@ import firebase from './firebase.js'
 
 
 class UserList extends Component {
-    
     render(){
         return(
             <div className="selectedTitles">
@@ -23,10 +22,12 @@ class UserList extends Component {
     }
 }
 
+
+
+
 class Header extends Component {
     constructor() {
         super();
-
         this.state = {
             // binding out input
             userInput: "",
@@ -38,11 +39,10 @@ class Header extends Component {
             showsInfo: {},
             // is the modal initially shown? no.
             isModalShown: false,
-
+            // tv shows that the user is adding to their list 
             userTvShows: [],
-
+            // binding the input for user title 
             userSubmitTitle: ""
-            
         }
     }
 
@@ -54,7 +54,9 @@ class Header extends Component {
 
     handleSearch = event => {
         event.preventDefault();
+
         const userQuery = this.state.userInput;
+
         this.setState({
             userSearch: userQuery
         }, () => {
@@ -71,11 +73,12 @@ class Header extends Component {
                 q: userSearch
             }
         }).then(results => {
+            // only want the results that have an image
             const filteredData = results.data.filter(item => 
                 item.show.image != null)
 
             console.log(filteredData)
-
+            
             this.setState({
                 showsArray: filteredData
             })
@@ -121,9 +124,10 @@ class Header extends Component {
         e.preventDefault();
         const showTitle = this.state.showsInfo.title
         const showValue = 1
+
         // we're grabbing shit from showTitle & showValue and shoving it into variable info
         const info = { title: showTitle, value: showValue}
-    
+        // copy of userTVshows to update
         const titleArray = [...this.state.userTvShows]
         
         titleArray.push(info)
@@ -133,7 +137,7 @@ class Header extends Component {
         })
     }
 
-    // function to remove a specific show (one show at a time)
+    // function to remove a specific show (one show at a time) by index value
     removeShow = (showToRemove) => {
         const showTitle = [...this.state.userTvShows]
 
@@ -156,15 +160,19 @@ class Header extends Component {
         
         const userChosenTitle = this.state.userSubmitTitle;
 
+        // taking the entire list and title 
         const userConfirmedList = {
             title: userChosenTitle,
             userList: this.state.userTvShows
         }
 
+        // reference to our firebase 
         const dbRef = firebase.database().ref();
-
+        
+        // push our complete user list to firebase
         dbRef.push(userConfirmedList)
 
+        // clear the array for next list 
         this.setState({
             userTvShows: []
         })
