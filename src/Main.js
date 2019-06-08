@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js'
+import { send } from 'q';
 
 class Main extends Component {
     constructor(){
         super()
 
         this.state = {
-            displayList: []
+            displayList: [],
         }
     }
 
@@ -16,16 +17,16 @@ class Main extends Component {
         // variable created to reference into firebase
         const dbRef = firebase.database().ref();
 
+        // on value change in firebase, pull down response from database
         dbRef.on('value', (response) => {
             // variable to pull data from firebase so we can shove it into newState's box
             const newState = [];
             // response from firebase, which will be shoved into the data variable?
             const data = response.val()
     
-
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
-                // console.log(key)
+
                 newState.push({
                     id: key,
                     userListObject: data[key]
@@ -43,21 +44,24 @@ class Main extends Component {
     // create a function to update the values on button click by using .update()
     // we need to make it where its on click ADD +1 to it
     valueIncrease = (event) => {
+
         const firebaseKey = event.target.closest('.completeList').getAttribute('data-key');
         // console.log(firebaseKey);
 
         
         const dbRef = firebase.database().ref();
+
         
         // variable copy makes a copy of the current state of display list
         const copy = [...this.state.displayList]
-        // variable target is the value of clicked on title???
+        // variable target is the value of clicked on title
         const target = event.target.value
         // console.log(target)
         // console.log(this.state.displayList)
         // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .completeList. Once we find the element of .completeList... get the attribute of data-id and return a value to us?
         const parentDiv = event.target.closest('.completeList').getAttribute('data-id');
-
+        const keyValue = event.target.closest('.overHere').getAttribute('data-key');
+        
         // grabs the vote value
         let currentVoteValue = copy[parentDiv].userListObject.userList[target].value;
         
@@ -69,55 +73,31 @@ class Main extends Component {
         
         // so now we update this.state.displayList with the updated copy data. cool.
         this.setState({
-            displayList: copy
-        }, ()=> {
+            displayList: copy,
+        }, () => {
+            const dbRef = firebase.database().ref()
 
-                dbRef.once('value', response => {
-                    const data = response.val()
+            dbRef.once('value', (response) => {
+                const newData = response.val()
 
-                    for (let key in data) {
-                        if (key === firebaseKey) {
-                            const updates = {};
-                            updates[key + '/userList/'] = this.state.displayList.userList[target].value;
-                            dbRef.update(updates);
-                            console.log(key)
-        
-                        }
+                for (let key in newData) {
+                    if (key === keyValue) {
+                        dbRef.child(key).child('userList').child(target).update({
+                            value: this.state.displayList[parentDiv].userListObject.userList[target].value
+                        })
+
+                        //hellllllllllllllllloooooo
+                        
                     }
-                })
+                    
+                }
+                
+            })
+
                 
         })
-
         
-
-        
-
-
-
-
-        // , ()=>{
-        //     dbRef.update(this.state.displayList.firebaseKey.userList[target].value)
-        // }
-        // , ()=>{
-        //         dbRef.once('value', (response) => {
-        //             const data=response.val()
-
-        //             for (let key in data) {
-        //                 this.state.displayList()
-        //             }
-        //         })
-        // }
-
-
-            // dbRef.update(this.state.displayList[parentDiv].userListObject.userList[target].value)
-
-        
-
-
-        // target the object thats holding that value.
-        // console.log(target, "+1")
     }
-
 
     render(){
         return(
