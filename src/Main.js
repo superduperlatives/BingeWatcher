@@ -14,8 +14,8 @@ class Main extends Component {
     // we do not need to add anything else in here?
     componentDidMount(){
         // variable created to reference into firebase
-        const dbRef = firebase.database().ref('userList/value');
-        console.log(dbRef)
+        const dbRef = firebase.database().ref();
+        // console.log(dbRef)
         // on value change in firebase, pull down response from database
         dbRef.on('value', (response) => {
             // variable to pull data from firebase so we can shove it into newState's box
@@ -25,19 +25,34 @@ class Main extends Component {
 
             // console.log(data);
 
-            // for (let object in data) {
-            //     console.log(data[object])
-
-            //     data[object].userList.sort((a, b) => {
-            //         if (a.value > b.value) return -1;
-            //         if (a.value < b.value) return 1;
-            //         return 0;
-            //     });
-                
-                
-            //     // console.log(data[object])
-            // }
+            // let completeSortedArray = []
             
+        
+            for (let object in data) {
+                // console.log(data[object])
+                let sortedArray = []
+
+                sortedArray = data[object].userList.sort((a, b) => {
+                    if (a.value > b.value) return -1;
+                    if (a.value < b.value) return 1;
+                    return 0;
+                });
+                dbRef.child(object).update({
+                    userList: sortedArray
+                })
+            }
+
+            // console.log(completeSortedArray)
+            //push back up to firebase
+
+            // for (let key in data) {
+            //     dbRef.child(key).update({
+            //         userList: completeSortedArray
+            //     })
+            // }
+
+            
+            //pull down sorted data
 
 
 
@@ -52,13 +67,12 @@ class Main extends Component {
 
             // console.log(newState)
 
-            // const sortedState = newState.map((item, index) => {
-            //     const sortedArray = item.userListObject.userList.sort((a, b) => {
+            // newState.map((item, index) => {
+            //     item.userListObject.userList.sort((a, b) => {
             //         if (a.value > b.value) return -1;
             //         if (a.value < b.value) return 1;
             //         return 0;
             //     });
-            //     return sortedArray
             // })
 
             // console.log(sortedState)
