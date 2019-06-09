@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from './firebase.js'
 
-
-
 class UserList extends Component {
     render(){
         return(
@@ -13,7 +11,10 @@ class UserList extends Component {
                     return (
                         <li key={index}>
                             <p>{show.title}</p>
-                            <button className="Remove" onClick={()=> this.props.removeShow(index)}>Remove</button>
+                            <button 
+                                className="remove" 
+                                onClick={()=> this.props.removeShow(index)}>Remove
+                            </button>
                         </li>
                     )
                 })}
@@ -21,9 +22,6 @@ class UserList extends Component {
         )
     }
 }
-
-
-
 
 class Header extends Component {
     constructor() {
@@ -189,14 +187,24 @@ class Header extends Component {
             <header className="wrapper">
                 <form action="">
                     <label htmlFor="searchBar"></label>
-                    <input type="text" id="searchBar" onChange={this.handleChange}></input>
-                    <input type="submit" onClick={this.handleSearch} />
+                    <input  
+                        id="searchBar" 
+                        onChange={this.handleChange}
+                        type="text">
+                    </input>
+                    <input 
+                        onClick={this.handleSearch}
+                        type="submit" 
+                    />
                 </form>
                 <div className="showLists">
                     <div className="showResults">
                         {/* map through the showsArray and for each item... we want to grab the data/ attributes...below? */}
                         {this.state.showsArray.map((item, key) => {
-                            return <div key={item.show.id} className="showPoster">
+                            return <div 
+                                    key={item.show.id} 
+                                    className="showPoster"
+                                    >
                                 <img
                                     src={item.show.image.original}
                                     alt=""
@@ -204,7 +212,8 @@ class Header extends Component {
                                     data-summary={item.show.summary}
                                     data-title={item.show.name}
                                     data-image={item.show.image.original}
-                                    onClick={this.showDetails} />
+                                    onClick={this.showDetails} 
+                                />
                             </div>
                         })}
                     </div>
@@ -215,21 +224,40 @@ class Header extends Component {
                             <h2>{this.state.showsInfo.title}</h2>
                             <p>{this.state.showsInfo.summary}</p>
                             <div className="modal-image">
-                                <img src={this.state.showsInfo.image} alt={this.state.showsInfo.title} />
+                                <img 
+                                src={this.state.showsInfo.image} 
+                                alt={this.state.showsInfo.title} 
+                                />
                             </div>
-                            <button className="clickClose" onClick={this.closeModal}>X</button>
-                            <button className="clickAdd" onClick={this.addToList}>Add to List</button>
+                            <button 
+                                className="clickClose" 
+                                onClick={this.closeModal}>X
+                            </button>
+                            <button 
+                                className="clickAdd" 
+                                onClick={this.addToList}>Add to List
+                            </button>
                         </div>
                     ) : null
                     }
 
                     <div className="listCreator">
-                        <UserList showTitle={this.state.userTvShows} removeShow={this.removeShow} />
+                        <UserList 
+                        showTitle={this.state.userTvShows} 
+                        removeShow={this.removeShow} 
+                        />
 
                         <form action="" onSubmit={this.submitList}>
                             <label htmlFor="userListTitle"></label>
-                            <input type="text" id="userListTitle" onChange={this.handleSubmitChange} />
-                            <input type="submit" value="Submit List" />
+                            <input 
+                                id="userListTitle" 
+                                onChange={this.handleSubmitChange}
+                                type="text" 
+                            />
+                            <input 
+                                type="submit" 
+                                value="Submit List" 
+                            />
                         </form>
                     </div>
                 </div>
