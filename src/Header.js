@@ -187,21 +187,26 @@ class Header extends Component {
         // settings for react-slick carousel
         const settings = {
             accessibility: true,
+            adaptiveHeight: true,
             autoplay: true,
-            autoplaySpeed: 2700,
+            autoplaySpeed: 3500,
+            centerMode: true,
             dots: true,
-            // set a className of slick-dots to style dots.
-            dotClass: 'slick-dots',
-            draggable: true,
             infinite: true,
             speed: 500,
-            slidesToShow: 5,
+            slide: true,
+            slidesToShow: 1,
             slidesToScroll: 1,
+            // swipe: true,
+            swipeToSlide: true,
+            variableWidth: true,
         };
 
         return (
-            <header className="wrapper">
-                <form action="">
+            <header className="hero wrapper">
+                <form 
+                action="" 
+                className="searchForm">
                     <label htmlFor="searchBar"></label>
                     <input  
                         id="searchBar" 
@@ -211,6 +216,7 @@ class Header extends Component {
                     <input 
                         onClick={this.handleSearch}
                         type="submit" 
+                        value="Search"
                     />
                 </form>
                 <div className="showLists">
@@ -257,26 +263,27 @@ class Header extends Component {
                         </div>
                     ) : null
                     }
+                </div>
+                <div className="listCreator">
+                    <UserList
+                        showTitle={this.state.userTvShows}
+                        removeShow={this.removeShow}
+                    />
 
-                    <div className="listCreator">
-                        <UserList 
-                        showTitle={this.state.userTvShows} 
-                        removeShow={this.removeShow} 
+                    <form 
+                    action="" 
+                    onSubmit={this.submitList}>
+                        <label htmlFor="userListTitle"></label>
+                        <input
+                            id="userListTitle"
+                            onChange={this.handleSubmitChange}
+                            type="text"
                         />
-
-                        <form action="" onSubmit={this.submitList}>
-                            <label htmlFor="userListTitle"></label>
-                            <input 
-                                id="userListTitle" 
-                                onChange={this.handleSubmitChange}
-                                type="text" 
-                            />
-                            <input 
-                                type="submit" 
-                                value="Submit List" 
-                            />
-                        </form>
-                    </div>
+                        <input
+                            type="submit"
+                            value="Submit List"
+                        />
+                    </form>
                 </div>
             </header>
         )
