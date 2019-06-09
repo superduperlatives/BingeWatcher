@@ -31,12 +31,12 @@ form {
 .showLists{
   position: relative;
 }
-
+/* 
 .showResults {
   display: flex;
   flex-wrap:wrap;
   justify-content: space-between;
-}
+} */
 
 .showPoster {
   width:200px;

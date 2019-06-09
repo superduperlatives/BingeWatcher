@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import firebase from './firebase.js'
+import firebase from './firebase.js';
+import Slider from "react-slick";
 
 class UserList extends Component {
     render(){
@@ -183,6 +184,21 @@ class Header extends Component {
     }
 
     render () {
+        // settings for react-slick carousel
+        const settings = {
+            accessibility: true,
+            autoplay: true,
+            autoplaySpeed: 2700,
+            dots: true,
+            // set a className of slick-dots to style dots.
+            dotClass: 'slick-dots',
+            draggable: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+        };
+
         return (
             <header className="wrapper">
                 <form action="">
@@ -199,6 +215,7 @@ class Header extends Component {
                 </form>
                 <div className="showLists">
                     <div className="showResults">
+                        <Slider {...settings} >
                         {/* map through the showsArray and for each item... we want to grab the data/ attributes...below? */}
                         {this.state.showsArray.map((item, key) => {
                             return <div 
@@ -216,8 +233,8 @@ class Header extends Component {
                                 />
                             </div>
                         })}
+                        </Slider>
                     </div>
-
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
