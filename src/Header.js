@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from './firebase.js';
-import Slider from "react-slick";
+import Slider from 'react-slick';
 
 class UserList extends Component {
     render(){
