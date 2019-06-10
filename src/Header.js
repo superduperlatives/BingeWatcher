@@ -197,7 +197,7 @@ class Header extends Component {
 
     submitList = (e) => {
         e.preventDefault()
-        
+
         const userChosenTitle = this.state.userSubmitTitle;
 
         // taking the entire list and title 
@@ -238,21 +238,30 @@ class Header extends Component {
 
         return (
             <header className="hero wrapper">
-                <form 
-                action="" 
-                className="searchForm">
-                    <label htmlFor="searchBar"></label>
-                    <input  
-                        id="searchBar" 
-                        onChange={this.handleChange}
-                        type="text">
-                    </input>
-                    <input 
-                        onClick={this.handleSearch}
-                        type="submit" 
-                        value="Search"
-                    />
-                </form>
+                <div className="headerSearchBar">
+                    <div className="appInfo">
+                        <h1>Binge Watchers</h1>
+                        <p className="slogan">Make a TV show list for your next binge</p>
+                    </div>
+                    <form 
+                    action="" 
+                    className="searchForm">
+                        <label htmlFor="searchBar"></label>
+                        <input  
+                            id="searchBar" 
+                            onChange={this.handleChange}
+                            type="text">
+                        </input>
+                        <input 
+                            onClick={this.handleSearch}
+                            type="submit" 
+                            value="Search"
+                        />
+                    </form>
+                </div>
+                <h1>
+
+                </h1>
                 <div className="showLists">
                     <div className="showResults">
                         <Slider {...settings} >
