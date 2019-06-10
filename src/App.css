@@ -229,10 +229,30 @@ h1 {
   bottom:0;
 }
 
+
+/* =============================================== */
+/* List Creator */
+/* =============================================== */
 .listCreator {
   border: 2px solid red;
   height: 400px;
   margin-top: 5%;
+  background-color: #cdd9d9;
+}
+
+.selectedTitles {
+  height: 100%;
+}
+
+.showSelection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+
 }
 
 /* community list section */
