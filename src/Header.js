@@ -7,18 +7,20 @@ class UserList extends Component {
     render(){
         return(
             <div className="selectedTitles">
-                {/* go into showTitle... map over it... for every show... add an index...? */}
-                {this.props.showTitle.map((show, index) => {
-                    return (
-                        <li key={index}>
-                            <p>{show.title}</p>
-                            <button 
-                                className="remove" 
-                                onClick={()=> this.props.removeShow(index)}>Remove
-                            </button>
-                        </li>
-                    )
-                })}
+                <ul className="showSelection">
+                    {/* go into showTitle... map over it... for every show... add an index...? */}
+                    {this.props.showTitle.map((show, index) => {
+                        return (
+                            <li key={index}>
+                                <p>{show.title}</p>
+                                <button 
+                                    className="remove" 
+                                    onClick={()=> this.props.removeShow(index)}>Remove
+                                </button>
+                            </li>                        
+                        )
+                    })}
+                </ul>
             </div>
         )
     }
@@ -197,7 +199,7 @@ class Header extends Component {
 
     submitList = (e) => {
         e.preventDefault()
-        
+
         const userChosenTitle = this.state.userSubmitTitle;
 
         // taking the entire list and title 
@@ -238,21 +240,30 @@ class Header extends Component {
 
         return (
             <header className="hero wrapper">
-                <form 
-                action="" 
-                className="searchForm">
-                    <label htmlFor="searchBar"></label>
-                    <input  
-                        id="searchBar" 
-                        onChange={this.handleChange}
-                        type="text">
-                    </input>
-                    <input 
-                        onClick={this.handleSearch}
-                        type="submit" 
-                        value="Search"
-                    />
-                </form>
+                <div className="headerSearchBar">
+                    <div className="appInfo">
+                        <h1>Binge Watchers</h1>
+                        <p className="slogan">Make a TV show list for your next binge</p>
+                    </div>
+                    <form 
+                    action="" 
+                    className="searchForm">
+                        <label htmlFor="searchBar"></label>
+                        <input  
+                            id="searchBar" 
+                            onChange={this.handleChange}
+                            type="text">
+                        </input>
+                        <input 
+                            onClick={this.handleSearch}
+                            type="submit" 
+                            value="Search"
+                        />
+                    </form>
+                </div>
+                <h1>
+
+                </h1>
                 <div className="showLists">
                     <div className="showResults">
                         <Slider {...settings} >
@@ -278,22 +289,27 @@ class Header extends Component {
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
+                        <div className="modalLeft">
                             <h2>{this.state.showsInfo.title}</h2>
                             <p>{this.state.showsInfo.summary}</p>
-                            <div className="modal-image">
-                                <img 
-                                src={this.state.showsInfo.image} 
-                                alt={this.state.showsInfo.title} 
-                                />
+                            <button
+                            className="clickAdd"
+                            onClick={this.addToList}>Add to List
+                            </button>
+                        </div>
+                        <div className="modalRight">
+                            <button
+                            className="clickClose"
+                            onClick={this.closeModal}>X
+                            </button>
+                            <div className="modalImage">
+                            <img
+                                src={this.state.showsInfo.image}
+                                alt={this.state.showsInfo.title}
+                            />
                             </div>
-                            <button 
-                                className="clickClose" 
-                                onClick={this.closeModal}>X
-                            </button>
-                            <button 
-                                className="clickAdd" 
-                                onClick={this.addToList}>Add to List
-                            </button>
+                            
+                        </div>
                         </div>
                     ) : null
                     }

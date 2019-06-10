@@ -177,8 +177,8 @@ class Main extends Component {
     render(){
         return(
             <section className="communityListSection">
-                <h2 className="communityListTitle">Community List</h2>
-                <div class="communityList">
+                <h2 className="communityListTitle">Community Lists</h2>
+                <div className="communityList">
                     {this.state.displayList.map((list, index) => {
                         return(
                             <div 
@@ -190,9 +190,9 @@ class Main extends Component {
                                 <ul>
                                     {list.userListObject.userList.map((show, index)=> {
                                         return(
-                                            <li key={index} class="showTitleandVote">
+                                            <li key={index} className="showTitleAndVote">
                                                 <h4>{show.title}</h4>
-                                                <div class="votesAndButtons">
+                                                <div className="votesAndButtons">
                                                     <p>{show.value}</p>
                                                     <div className="votesButtons">
                                                         <button
