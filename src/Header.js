@@ -73,7 +73,7 @@ class Header extends Component {
         }).then(results => {
             // only want the results that have an image
             const filteredStarterData = results.data.filter(item =>
-                item.show.image != null)
+                item.show.image != null && item.show.summary != null)
 
             // console.log(filteredData)
 
