@@ -314,45 +314,43 @@ addToList = (e) => {
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
-<<<<<<< HEAD
-=======
-                        <div className="modalLeft">
-                            <h2>{this.state.showsInfo.title}</h2>
-                            <div className="showDescription">
-                                <p>{this.state.showsInfo.summary}</p>
-                            </div>
-                            <button
-                            className="clickAdd"
-                            onClick={this.addToList}>Add to List
-                            </button>
-                        </div>
-                        <div className="modalRight">
-                            <button
-                            className="clickClose"
-                            onClick={this.closeModal}>X
-                            </button>
->>>>>>> 8438f8830745b96cac5055e5e23c20853c030257
-                            <div className="modalImage">
-                                <img
-                                    src={this.state.showsInfo.image}
-                                    alt={this.state.showsInfo.title}
-                                />
-                            </div>
-                            <div className="modalText">
+                            <div className="modalLeft">
                                 <h2>{this.state.showsInfo.title}</h2>
-                                <p>{this.state.showsInfo.summary}</p>
-                                <div className="modalButtons">
+                                <div className="showDescription">
+                                    <p>{this.state.showsInfo.summary}</p>
+                                </div>
                                 <button
-                                    className="clickAdd"
-                                    onClick={this.addToList}>
-                                    Add to List
-                                </button>
-                                <button
-                                    className="clickClose"
-                                    onClick={this.closeModal}>
-                                    X
+                                className="clickAdd"
+                                onClick={this.addToList}>Add to List
                                 </button>
                             </div>
+                            <div className="modalRight">
+                                <button
+                                className="clickClose"
+                                onClick={this.closeModal}>X
+                                </button>
+                                <div className="modalImage">
+                                    <img
+                                        src={this.state.showsInfo.image}
+                                        alt={this.state.showsInfo.title}
+                                    />
+                                </div>
+                                <div className="modalText">
+                                    <h2>{this.state.showsInfo.title}</h2>
+                                    <p>{this.state.showsInfo.summary}</p>
+                                    <div className="modalButtons">
+                                    <button
+                                        className="clickAdd"
+                                        onClick={this.addToList}>
+                                        Add to List
+                                    </button>
+                                    <button
+                                        className="clickClose"
+                                        onClick={this.closeModal}>
+                                        X
+                                    </button>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     ) : null
