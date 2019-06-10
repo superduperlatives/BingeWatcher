@@ -7,18 +7,20 @@ class UserList extends Component {
     render(){
         return(
             <div className="selectedTitles">
-                {/* go into showTitle... map over it... for every show... add an index...? */}
-                {this.props.showTitle.map((show, index) => {
-                    return (
-                        <li key={index}>
-                            <p>{show.title}</p>
-                            <button 
-                                className="remove" 
-                                onClick={()=> this.props.removeShow(index)}>Remove
-                            </button>
-                        </li>
-                    )
-                })}
+                <ul className="showSelection">
+                    {/* go into showTitle... map over it... for every show... add an index...? */}
+                    {this.props.showTitle.map((show, index) => {
+                        return (
+                            <li key={index}>
+                                <p>{show.title}</p>
+                                <button 
+                                    className="remove" 
+                                    onClick={()=> this.props.removeShow(index)}>Remove
+                                </button>
+                            </li>                        
+                        )
+                    })}
+                </ul>
             </div>
         )
     }

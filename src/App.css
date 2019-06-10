@@ -103,8 +103,31 @@ form {
   bottom:0;
 }
 
+
+/* =============================================== */
+/* List Creator */
+/* =============================================== */
+:root{
+  --primaryColor: #cdd9d9;
+}
+
 .listCreator {
   border: 2px solid red;
   height: 400px;
   margin-top: 5%;
+  background-color: var(--primaryColor);
 }
+
+.selectedTitles {
+  height: 100%;
+}
+
+.showSelection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+
