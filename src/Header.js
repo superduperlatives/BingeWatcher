@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from './firebase.js';
 import Slider from 'react-slick';
+import swal from 'sweetalert';
 
 class UserList extends Component {
     render(){
@@ -172,7 +173,11 @@ class Header extends Component {
                 userTvShows: titleArray
             })
         } else {
-            alert("You may only add up to 10 shows to your list!");
+            swal({
+                title: "You may only add up to 10 shows to your list!",
+                icon: "warning",
+                button: "Nice.",
+            });
         }
         
     }
