@@ -87,10 +87,16 @@ class Header extends Component {
         })
     }
 
+    handleChange = event => {
+	this.setState({
+		userInput: event.target.value
+	})
+}
+
     handleSearch = event => {
         event.preventDefault();
 
-        if (this.state.userInput.length === 0) {
+        if (this.state.userInput === '') {
             alert(`Don't leave the text field empty!!`)
         } else {
             const userQuery = this.state.userInput;
@@ -113,14 +119,19 @@ class Header extends Component {
             }
         }).then(results => {
             // only want the results that have an image
-            const filteredData = results.data.filter(item => 
-                item.show.image != null && item.show.summary != null);
+            console.log('results', results.data)
+            if (results.data.length === 0) {
+                alert(`Sorry, we couldn't find any shows for you. Please try searching for another show`)
+            } else {
+                const filteredData = results.data.filter(item =>
+                    item.show.image != null && item.show.summary != null);
 
-            console.log(filteredData)
-            
-            this.setState({
-                showsArray: filteredData
-            })
+                console.log(filteredData)
+
+                this.setState({
+                    showsArray: filteredData
+                })
+            }  
 
         }).catch(error => {
             console.log('error')
