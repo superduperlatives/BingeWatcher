@@ -31,25 +31,26 @@ form {
 
 .wrapper {
   /* placeholder values for margin. please feel free to adjust it! */
-  background-color: #123181;
+  /* background-color: #123181; */
   padding: 2.5% 7.5%;
 }
 
 /* react-slick dot and arrow styling. */
 .slick-dots li button::before {
   font-size: .8rem;
-  color: #0DC0B0;
+  color: #CDD9D9;
   opacity: 0.7;
 }
 
 .slick-dots li.slick-active button::before {
-  color: #CDD9D9;
+  /* color: #CDD9D9; */
+  color: #0DC0B0;
   opacity: 1;
 }
 
 .slick-next:before,
 .slick-prev:before {
-  color: #0DC0B0;
+  color: #CDD9D9;
   font-size: 2.5rem;
 }
 
@@ -67,13 +68,21 @@ form {
   left: -55px;
 }
 
+.slick-initialized .slick-slide {
+  width: 220px;
+}
+
 /* header */
 /* /////////////////////////////////////////////////// */
 .hero {
+  background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
+/* #123181 */
 
 .searchForm {
   text-align: right;
@@ -89,7 +98,15 @@ form {
   height:300px;
   overflow: hidden;
   /* padding: 0% 2%; */
+  transition: all ease-in .5s;
   width:200px;
+}
+
+.showPoster:active,
+.showPoers:focus,
+.showPoster:hover {
+  border: 3px solid #0DC0B0;
+  transition: all ease-in-out .5s;
 }
 
 .showModal {
