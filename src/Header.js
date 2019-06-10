@@ -43,7 +43,11 @@ class Header extends Component {
             // tv shows that the user is adding to their list 
             userTvShows: [],
             // binding the input for user title 
-            userSubmitTitle: ""
+            userSubmitTitle: "",
+
+            idArray: [],
+
+            isListCreatorShown: false,
         }
     }
     
@@ -156,28 +160,42 @@ class Header extends Component {
         })
     }
 
-    addToList = (e) => {
-        e.preventDefault();
+addToList = (e) => {
+	e.preventDefault();
 
-        if (this.state.userTvShows.length < 10) {
-            const showTitle = this.state.showsInfo.title
-            const showValue = 1
+	if (this.state.userTvShows.length < 10) {
 
-            // we're grabbing shit from showTitle & showValue and shoving it into variable info
-            const info = { title: showTitle, value: showValue }
-            // copy of userTVshows to update
-            const titleArray = [...this.state.userTvShows]
+		const idArrayCopy = [...this.state.idArray]
 
-            titleArray.push(info)
+		if (!idArrayCopy.includes(this.state.showsInfo.id)) {
+			idArrayCopy.push(this.state.showsInfo.id)
 
-            this.setState({
-                userTvShows: titleArray
-            })
-        } else {
-            alert("You may only add up to 10 shows to your list!");
-        }
-        
-    }
+			const showTitle = this.state.showsInfo.title
+			const showValue = 1
+
+			// we're grabbing shit from showTitle & showValue and shoving it into variable info
+			const info = { title: showTitle, value: showValue }
+			// copy of userTVshows to update
+			const titleArray = [...this.state.userTvShows]
+
+			titleArray.push(info)
+
+			this.setState({
+				userTvShows: titleArray,
+				idArray: idArrayCopy
+			})
+
+			console.log(this.state.idArray)
+		} else {
+			alert('You can only have the show once in your list');
+		}            
+
+
+	} else {
+		alert("You may only add up to 10 shows to your list!");
+	}
+
+}
 
     // function to remove a specific show (one show at a time) by index value
     removeShow = (showToRemove) => {
@@ -286,54 +304,62 @@ class Header extends Component {
                         })}
                         </Slider>
                     </div>
+                </div>
+                <div className="listCreator">
+                    <div className="modalWrapper">
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
-                        <div className="modalLeft">
-                            <h2>{this.state.showsInfo.title}</h2>
-                            <p>{this.state.showsInfo.summary}</p>
-                            <button
-                            className="clickAdd"
-                            onClick={this.addToList}>Add to List
-                            </button>
-                        </div>
-                        <div className="modalRight">
-                            <button
-                            className="clickClose"
-                            onClick={this.closeModal}>X
-                            </button>
                             <div className="modalImage">
-                            <img
-                                src={this.state.showsInfo.image}
-                                alt={this.state.showsInfo.title}
-                            />
+                                <img
+                                    src={this.state.showsInfo.image}
+                                    alt={this.state.showsInfo.title}
+                                />
                             </div>
-                            
-                        </div>
+                            <div className="modalText">
+                                <h2>{this.state.showsInfo.title}</h2>
+                                <p>{this.state.showsInfo.summary}</p>
+                                <div className="modalButtons">
+                                <button
+                                    className="clickAdd"
+                                    onClick={this.addToList}>
+                                    Add to List
+                                </button>
+                                <button
+                                    className="clickClose"
+                                    onClick={this.closeModal}>
+                                    X
+                                </button>
+                            </div>
+                            </div>
                         </div>
                     ) : null
                     }
-                </div>
-                <div className="listCreator">
-                    <UserList
-                        showTitle={this.state.userTvShows}
-                        removeShow={this.removeShow}
-                    />
-
-                    <form 
-                    action="" 
-                    onSubmit={this.submitList}>
-                        <label htmlFor="userListTitle"></label>
-                        <input
-                            id="userListTitle"
-                            onChange={this.handleSubmitChange}
-                            type="text"
-                        />
-                        <input
-                            type="submit"
-                            value="Submit List"
-                        />
-                    </form>
+                    </div>
+                    <div className="listWrapper">
+                        <div className="userWrapper">
+                            <UserList
+                            showTitle={this.state.userTvShows}
+                            removeShow={this.removeShow}
+                            />
+                        </div>
+                        <div className="formWrapper">
+                            <form 
+                                action="" 
+                                onSubmit={this.submitList}>
+                            <label htmlFor="userListTitle"></label>
+                            <input
+                                id="userListTitle"
+                                onChange={this.handleSubmitChange}
+                                type="text"
+                            />
+                            <input
+                                type="submit"
+                                value="Submit List"
+                            />
+                        </form>
+                        </div>
+                    </div>
                 </div>
             </header>
         )
