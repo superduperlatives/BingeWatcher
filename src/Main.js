@@ -176,44 +176,49 @@ class Main extends Component {
 
     render(){
         return(
-            <div>
-                {this.state.displayList.map((list, index) => {
-                    return(
-                        <div 
-                        className="completeList" 
-                        data-id={index} 
-                        data-key={list.id}
-                        key={list.id}>
-                            <h3>{list.userListObject.title}</h3>
-                            <ul>
-                                {list.userListObject.userList.map((show, index)=> {
-                                    return(
-                                        <li key={index}>
-                                            <h3>{show.title}</h3>
-                                            <div>
-                                                <p>{show.value}</p>
-                                                <button
-                                                    className="upvote"
-                                                    onClick={this.valueIncrease}
-                                                    value={index}>Love
-                                                </button>
-                                                <button
-                                                    className="downvote"
-                                                    onClick={this.valueDecrease}
-                                                    value={index}>Hate
-                                                </button>
-                                            </div>
-                                            
-                                            
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                        
-                    )
-                })}
-            </div>
+            <section className="communityListSection">
+                <h2 className="communityListTitle">Community Lists</h2>
+                <div className="communityList">
+                    {this.state.displayList.map((list, index) => {
+                        return(
+                            <div 
+                            className="completeList" 
+                            data-id={index} 
+                            data-key={list.id}
+                            key={list.id}>
+                                <h3>{list.userListObject.title}</h3>
+                                <ul>
+                                    {list.userListObject.userList.map((show, index)=> {
+                                        return(
+                                            <li key={index} className="showTitleAndVote">
+                                                <h4>{show.title}</h4>
+                                                <div className="votesAndButtons">
+                                                    <p>{show.value}</p>
+                                                    <div className="votesButtons">
+                                                        <button
+                                                            className="upvote"
+                                                            onClick={this.valueIncrease}
+                                                            value={index}>&#10759;
+                                                        </button>
+                                                        <button
+                                                            className="downvote"
+                                                            onClick={this.valueDecrease}
+                                                            value={index}>&#10760;
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                            
+                        )
+                    })}
+                </div>
+            </section>
             
         )
     }
