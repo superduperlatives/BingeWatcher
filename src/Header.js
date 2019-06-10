@@ -111,7 +111,7 @@ class Header extends Component {
         }).then(results => {
             // only want the results that have an image
             const filteredData = results.data.filter(item => 
-                item.show.image != null)
+                item.show.image != null && item.show.summary != null);
 
             console.log(filteredData)
             
@@ -128,8 +128,12 @@ class Header extends Component {
     showDetails = (e) => {
         const title = e.target.getAttribute("data-title");
         const id = e.target.getAttribute("data-id");
-        const summary = e.target.getAttribute("data-summary");
+        const dataSummary = e.target.getAttribute("data-summary");
         const image = e.target.getAttribute("data-image");
+
+
+        const summary = dataSummary.replace(/<[^>]+>/g, '');
+
 
         this.setState ({
             showsInfo: {
@@ -291,7 +295,9 @@ class Header extends Component {
                         <div className="showModal">
                         <div className="modalLeft">
                             <h2>{this.state.showsInfo.title}</h2>
-                            <p>{this.state.showsInfo.summary}</p>
+                            <div className="showDescription">
+                                <p>{this.state.showsInfo.summary}</p>
+                            </div>
                             <button
                             className="clickAdd"
                             onClick={this.addToList}>Add to List
