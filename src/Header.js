@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from './firebase.js';
 import Slider from 'react-slick';
+import swal from 'sweetalert';
 
 class UserList extends Component {
     render(){
@@ -191,12 +192,20 @@ addToList = (e) => {
 
 			console.log(this.state.idArray)
 		} else {
-			alert('You can only have the show once in your list');
+            swal({
+                title: "You can only have the show once in your list",
+                icon: "warning",
+                button: "Nice.",
+            });
 		}            
 
 
 	} else {
-		alert("You may only add up to 10 shows to your list!");
+        swal({
+            title: "You may only add up to 10 shows to your list!",
+            icon: "warning",
+            button: "Nice.",
+        });
 	}
 
 }
