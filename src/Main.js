@@ -207,14 +207,11 @@ class Main extends Component {
                                                         </button>
                                                     </div>
                                                 </div>
-                                                
-                                                
                                             </li>
                                         )
                                     })}
                                 </ul>
                             </div>
-                            
                         )
                     })}
                 </div>
