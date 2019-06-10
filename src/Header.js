@@ -314,31 +314,16 @@ addToList = (e) => {
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
-                            <div className="modalLeft">
-                                <h2>{this.state.showsInfo.title}</h2>
-                                <div className="showDescription">
-                                    <p>{this.state.showsInfo.summary}</p>
-                                </div>
-                                <button
-                                className="clickAdd"
-                                onClick={this.addToList}>Add to List
-                                </button>
+                            <div className="modalImage">
+                                <img
+                                    src={this.state.showsInfo.image}
+                                    alt={this.state.showsInfo.title}
+                                />
                             </div>
-                            <div className="modalRight">
-                                <button
-                                className="clickClose"
-                                onClick={this.closeModal}>X
-                                </button>
-                                <div className="modalImage">
-                                    <img
-                                        src={this.state.showsInfo.image}
-                                        alt={this.state.showsInfo.title}
-                                    />
-                                </div>
-                                <div className="modalText">
-                                    <h2>{this.state.showsInfo.title}</h2>
-                                    <p>{this.state.showsInfo.summary}</p>
-                                    <div className="modalButtons">
+                            <div className="modalText">
+                                <h2>{this.state.showsInfo.title}</h2>
+                                <p>{this.state.showsInfo.summary}</p>
+                                <div className="modalButtons">
                                     <button
                                         className="clickAdd"
                                         onClick={this.addToList}>
@@ -349,7 +334,6 @@ addToList = (e) => {
                                         onClick={this.closeModal}>
                                         X
                                     </button>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -362,22 +346,22 @@ addToList = (e) => {
                             showTitle={this.state.userTvShows}
                             removeShow={this.removeShow}
                             />
-                        </div>
-                        <div className="formWrapper">
-                            <form 
-                                action="" 
-                                onSubmit={this.submitList}>
-                            <label htmlFor="userListTitle"></label>
-                            <input
-                                id="userListTitle"
-                                onChange={this.handleSubmitChange}
-                                type="text"
-                            />
-                            <input
-                                type="submit"
-                                value="Submit List"
-                            />
-                        </form>
+                            <div className="formWrapper">
+                                <form 
+                                    action="" 
+                                    onSubmit={this.submitList}>
+                                <label htmlFor="userListTitle"></label>
+                                <input
+                                    id="userListTitle"
+                                    onChange={this.handleSubmitChange}
+                                    type="text"
+                                />
+                                <input
+                                    type="submit"
+                                    value="Submit List"
+                                />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
