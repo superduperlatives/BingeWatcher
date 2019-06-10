@@ -115,7 +115,7 @@ class Header extends Component {
         }).then(results => {
             // only want the results that have an image
             const filteredData = results.data.filter(item => 
-                item.show.image != null)
+                item.show.image != null && item.show.summary != null);
 
             console.log(filteredData)
             
@@ -132,8 +132,12 @@ class Header extends Component {
     showDetails = (e) => {
         const title = e.target.getAttribute("data-title");
         const id = e.target.getAttribute("data-id");
-        const summary = e.target.getAttribute("data-summary");
+        const dataSummary = e.target.getAttribute("data-summary");
         const image = e.target.getAttribute("data-image");
+
+
+        const summary = dataSummary.replace(/<[^>]+>/g, '');
+
 
         this.setState ({
             showsInfo: {
@@ -310,6 +314,24 @@ addToList = (e) => {
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
+<<<<<<< HEAD
+=======
+                        <div className="modalLeft">
+                            <h2>{this.state.showsInfo.title}</h2>
+                            <div className="showDescription">
+                                <p>{this.state.showsInfo.summary}</p>
+                            </div>
+                            <button
+                            className="clickAdd"
+                            onClick={this.addToList}>Add to List
+                            </button>
+                        </div>
+                        <div className="modalRight">
+                            <button
+                            className="clickClose"
+                            onClick={this.closeModal}>X
+                            </button>
+>>>>>>> 8438f8830745b96cac5055e5e23c20853c030257
                             <div className="modalImage">
                                 <img
                                     src={this.state.showsInfo.image}
