@@ -87,22 +87,20 @@ class Header extends Component {
         })
     }
 
-    handleChange = event => {
-        this.setState({
-            userInput: event.target.value
-        })
-    }
-
     handleSearch = event => {
         event.preventDefault();
 
-        const userQuery = this.state.userInput;
+        if (this.state.userInput.length === 0) {
+            alert(`Don't leave the text field empty!!`)
+        } else {
+            const userQuery = this.state.userInput;
 
-        this.setState({
-            userSearch: userQuery
-        }, () => {
-            this.searchShows(this.state.userSearch)
-        })
+            this.setState({
+                userSearch: userQuery
+            }, () => {
+                this.searchShows(this.state.userSearch)
+            })
+        }
     }
 
     searchShows = (userSearch) => {
@@ -231,24 +229,31 @@ addToList = (e) => {
     submitList = (e) => {
         e.preventDefault()
 
-        const userChosenTitle = this.state.userSubmitTitle;
+        console.log(this.state.userTvShows)
 
-        // taking the entire list and title 
-        const userConfirmedList = {
-            title: userChosenTitle,
-            userList: this.state.userTvShows
+        if (this.state.userTvShows.length != 0) {
+            const userChosenTitle = this.state.userSubmitTitle;
+
+            // taking the entire list and title 
+            const userConfirmedList = {
+                title: userChosenTitle,
+                userList: this.state.userTvShows
+            }
+
+            // reference to our firebase 
+            const dbRef = firebase.database().ref();
+
+            // push our complete user list to firebase
+            dbRef.push(userConfirmedList)
+
+            // clear the array for next list 
+            this.setState({
+                userTvShows: []
+            })
+        } else {
+            alert("Add at least one show");
         }
 
-        // reference to our firebase 
-        const dbRef = firebase.database().ref();
-        
-        // push our complete user list to firebase
-        dbRef.push(userConfirmedList)
-
-        // clear the array for next list 
-        this.setState({
-            userTvShows: []
-        })
     }
 
     render () {
