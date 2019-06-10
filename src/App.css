@@ -254,6 +254,14 @@ h1 {
   padding: 1%;
   position: relative;
 }
+
+.showDescription {
+  width:100%;
+  height:50%;
+  margin: 2% 0;
+  overflow:auto
+}
+
 .clickClose {
   position: absolute;
   padding:2%;

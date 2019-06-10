@@ -291,7 +291,9 @@ class Header extends Component {
                         <div className="showModal">
                         <div className="modalLeft">
                             <h2>{this.state.showsInfo.title}</h2>
-                            <p>{this.state.showsInfo.summary}</p>
+                            <div className="showDescription">
+                                <p>{this.state.showsInfo.summary}</p>
+                            </div>
                             <button
                             className="clickAdd"
                             onClick={this.addToList}>Add to List
