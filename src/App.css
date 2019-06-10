@@ -11,6 +11,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 /* general */
 /* /////////////////////////////////////////////////// */
 
+h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
 img {
   height: 100%;
   max-width: 100%;
@@ -108,3 +117,83 @@ form {
   height: 400px;
   margin-top: 5%;
 }
+
+/* community list section */
+/* /////////////////////////////////////////////////// */
+
+.communityListTitle {
+  text-align: center;
+  padding: 2%;
+}
+
+.communityList {
+  border: 2px solid dodgerblue;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.completeList {
+  /* border: 2px solid coral; */
+  background-color: coral;
+  border-radius: 15px;
+  width: 21%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+  padding: 1%;
+}
+
+.completeList h3 {
+  text-align: center;
+  text-transform: uppercase;
+  padding: 5% 0;
+  font-size: 1.3rem;
+}
+
+.showTitleandVote {
+  border-top: 2px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.showTitleandVote h4 {
+  border: 2px solid coral;
+  width: 65%;
+  font-size: 1.1rem;
+}
+
+.votesAndButtons {
+  border: 2px solid coral;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.votesAndButtons p {
+  padding: 5% 0;
+}
+
+.votesButtons {
+  display: flex;
+  /* border: 2px solid blue; */
+  justify-content: space-between;
+}
+
+.votesButtons button {
+  /* border: 2px solid red; */
+  /* background-color: lightgray; */
+  margin: 2% 0;
+  border: none;
+}
+
+.votesButtons .upvote {
+  background-color: green;
+} 
+
+.votesButtons .downvote {
+  background-color: firebrick;
+} 
+
+
