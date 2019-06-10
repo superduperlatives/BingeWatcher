@@ -44,6 +44,41 @@ class Header extends Component {
             userSubmitTitle: ""
         }
     }
+    
+    // this is where we start making the random API call
+    randomNumber = (min, max) => {
+        let num = Math.floor(Math.random() * (max - min)) + min;
+        return num;
+    }
+
+    componentDidMount() {
+
+        const starterShows = ['comedy', 'food', 'horror', 'action', 'drama', 'love', 'anime', 'disney']
+
+        const randNum = this.randomNumber(0, starterShows.length)
+
+        axios({
+            method: 'GET',
+            url: "http://api.tvmaze.com/search/shows",
+            dataResponse: 'json',
+            params: {
+                q: starterShows[randNum]
+            }
+        }).then(results => {
+            // only want the results that have an image
+            const filteredStarterData = results.data.filter(item =>
+                item.show.image != null)
+
+            // console.log(filteredData)
+
+            this.setState({
+                showsArray: filteredStarterData
+            })
+
+        }).catch(error => {
+            console.log('error')
+        })
+    }
 
     handleChange = event => {
         this.setState({
@@ -193,11 +228,10 @@ class Header extends Component {
             centerMode: true,
             dots: true,
             infinite: true,
-            speed: 500,
+            speed: 750,
             slide: true,
             slidesToShow: 1,
             slidesToScroll: 1,
-            // swipe: true,
             swipeToSlide: true,
             variableWidth: true,
         };
