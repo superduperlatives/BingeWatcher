@@ -291,35 +291,6 @@ h1 {
   position: relative;
 }
 
-<<<<<<< HEAD
-=======
-.showDescription {
-  width:100%;
-  height:50%;
-  margin: 2% 0;
-  overflow:auto
-}
-
-.clickClose {
-  position: absolute;
-  padding:2%;
-  top:0;
-  right:0;
-}
-.modalImage {
-  width:100%;
-  height:100%;
-}
-.modalImage img {
-  height:100%;
-  transform: none;
-}
-.clickAdd {
-  margin: 2% 0;
-}
->>>>>>> 8438f8830745b96cac5055e5e23c20853c030257
-
-
 /* =============================================== */
 /* List Creator */
 /* =============================================== */
