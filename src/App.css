@@ -218,6 +218,9 @@ h1 {
   transition: all ease-in-out .5s;
 }
 
+/* modal styling */
+/* /////////////////////////////////////////////////// */
+
 .showModal {
   width:400px;
   height:400px;
@@ -227,6 +230,46 @@ h1 {
   right:0;
   left:0;
   bottom:0;
+}
+
+.showModal {
+  margin: 8% auto;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 75%;
+  height: 500px;
+  background-color:#CDD9D9;
+  border: 4px solid #123181;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+}
+.modalRight {
+  width:40%;
+}
+.modalLeft {
+  width:60%;
+  padding: 1%;
+  position: relative;
+}
+.clickClose {
+  position: absolute;
+  padding:2%;
+  top:0;
+  right:0;
+}
+.modalImage {
+  width:100%;
+  height:100%;
+}
+.modalImage img {
+  height:100%;
+  transform: none;
+}
+.clickAdd {
+  margin: 2% 0;
 }
 
 
@@ -249,10 +292,6 @@ h1 {
   flex-wrap: wrap;
   flex-direction: column;
   height: 100%;
-}
-
-
-
 }
 
 /* community list section */

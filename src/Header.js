@@ -289,22 +289,27 @@ class Header extends Component {
                     {/* this is where we are going to append the modal on click? */}
                     {this.state.isModalShown ? (
                         <div className="showModal">
+                        <div className="modalLeft">
                             <h2>{this.state.showsInfo.title}</h2>
                             <p>{this.state.showsInfo.summary}</p>
-                            <div className="modal-image">
-                                <img 
-                                src={this.state.showsInfo.image} 
-                                alt={this.state.showsInfo.title} 
-                                />
+                            <button
+                            className="clickAdd"
+                            onClick={this.addToList}>Add to List
+                            </button>
+                        </div>
+                        <div className="modalRight">
+                            <button
+                            className="clickClose"
+                            onClick={this.closeModal}>X
+                            </button>
+                            <div className="modalImage">
+                            <img
+                                src={this.state.showsInfo.image}
+                                alt={this.state.showsInfo.title}
+                            />
                             </div>
-                            <button 
-                                className="clickClose" 
-                                onClick={this.closeModal}>X
-                            </button>
-                            <button 
-                                className="clickAdd" 
-                                onClick={this.addToList}>Add to List
-                            </button>
+                            
+                        </div>
                         </div>
                     ) : null
                     }
