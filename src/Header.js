@@ -311,7 +311,8 @@ addToList = (e) => {
                         <input  
                             id="searchBar" 
                             onChange={this.handleChange}
-                            type="text">
+                            type="text"
+                            placeholder="Search">
                         </input>
                         <input 
                             onClick={this.handleSearch}
@@ -392,6 +393,7 @@ addToList = (e) => {
                                     id="userListTitle"
                                     onChange={this.handleSubmitChange}
                                     type="text"
+                                    placeholder="Give your list a name!"                                    
                                 />
                                 <input
                                     type="submit"
