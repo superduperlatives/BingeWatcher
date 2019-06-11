@@ -155,9 +155,10 @@ input[type=text]:active {
   background-position: center;
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
+  justify-content: center;
+  height: 100vh;
+  width:100%;
 }
-/* #123181 */
 
 h1 {
   color: #cdd9d9;
@@ -219,24 +220,38 @@ h1 {
   transition: all ease-in-out .5s;
 }
 
+.startCreator {
+  width: 25%;
+  margin: 5% auto;
+}
+
 /* modal styling */
 /* /////////////////////////////////////////////////// */
 
+.modalWrapper {
+  margin: 0 auto;
+  position: absolute;
+}
+
 .showModal {
   display: flex;
+  width:60%;
+  padding: 2%;
+  background-color: #cdd9d9;
+  margin: 0 auto;
+  position: relative;
 }
 
 .modalImage {
   display: flex;
   height: 100%;
   overflow: hidden;
-  transition: all ease-in .5s;
   width: 50%;
 }
 
 .modalText {
-  padding: 2.5%;
   width: 100%;
+  padding: 2.5%;
 }
 
 .modalButtons {
@@ -244,94 +259,21 @@ h1 {
 }
 
 .clickClose {
-  background: none;
-  left: 64.5%;
-  padding: 0.5%;
+  top: 0;
+  right: 0;
+  padding: 2%;
   position: absolute;
-  top: 72.5%;
 }
 
 .clickAdd {
-  border-radius: 10px;
   padding: 2%;
 }
 
-
-/* .showModal {
-  width:400px;
-  height:400px;
-  position: absolute;
-  background-color: tomato;
-  top:0;
-  right:0;
-  left:0;
-  bottom:0;
-}
-
-.showModal {
-  margin: 8% auto;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  width: 75%;
-  height: 500px;
-  background-color:#CDD9D9;
-  border: 4px solid #123181;
-  top:0;
-  right:0;
-  left:0;
-  bottom:0;
-}
-.modalRight {
-  width:40%;
-}
-.modalLeft {
-  width:60%;
-  padding: 1%;
-  position: relative;
-}
-
-/* =============================================== */
-/* List Creator */
-/* =============================================== */
-.listCreator {
-  background-color: #cdd9d9;
-  border: 2px solid red;
-  display: flex;
-  /* height: 400px; */
+.modalText p{
+  width: 100%;
+  height: 200px;
   margin-top: 5%;
-}
-
-/* .listWrapper,
-.modalWrapper {
-  width: 50%;
-} */
-.listWrapper {
-  width: 30%;
-}
-
-.modalWrapper {
-  width: 70%;
-}
-
-.formWrapper {
-  text-align: right;
-}
-
-.selectedTitles {
-  height: 100%;
-}
-
-.showSelection {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  height: 100%;
-}
-
-.showSelection li {
-  display: flex;
-  justify-content: space-between;
+  overflow: auto;
 }
 
 /* community list section */
@@ -399,3 +341,121 @@ h1 {
 .votesButtons .downvote {
   background-color: firebrick;
 } 
+
+/* Create Your List */
+
+
+/* =============================================== */
+/* List Creator */
+/* =============================================== */
+
+.listWrapper {
+  width:100%;
+  background-color: rgba(20, 20, 20, 0.9);
+  color: #cdd9d9;
+  margin-top: 3%;
+  padding:2%;
+}
+
+.formWrapper {
+  width: 100%;
+  height: 175px;
+  margin: 0 auto;
+  overflow: auto;
+  transition: all ease-in .5s;
+  
+}
+
+.emptyList {
+  width:100%;
+  margin: 2% auto;
+  text-align: center;
+}
+
+.listCreatorForm{
+  width:99%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+
+}
+
+.listCreatorForm input[type=submit],
+.listCreatorForm input[type=text] {
+  padding: 0.5%;
+  margin-bottom: 1%;
+}
+
+.listCreatorForm input[type=text] {
+  width: 30%;
+  color: #cdd9d9;
+  border: 2px solid #cdd9d9;
+  background-color:#141414;
+}
+
+.listCreatorForm input[type=text]::placeholder {
+  opacity: 1;
+}
+
+.listCreatorForm input[type=text]:active,
+.listCreatorForm input[type=text]:focus {
+  border: 2px solid #0dc0b0;
+}
+
+.listCreatorForm input[type=submit] {
+  width: 20%;
+}
+
+.showSelection {
+  width:100%;
+  height:100px;
+  margin:0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.showSelection li{
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.2rem;
+  display:block;
+  background-color:#141414;
+  color: #cdd9d9;
+  border: 1px solid #fefefe;
+  /* border-radius: 10px; */
+  margin: 5px;
+  padding: 2px;
+  width: 49%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+.showSelection li:hover {
+  color:#141414;
+  background-color:#cdd9d9;
+}
+
+.removeButton {
+  background: url(./assets/removeTrashCan.png) center/ contain no-repeat;
+  padding:2%;
+  margin:1%;
+}
+
+.removeButton:hover,
+.removeButton:active,
+.removeButton:focus {
+  background: url(./assets/removeTrashCanBlack.png) center/ contain no-repeat;
+}
+
+
+/* Colors
+Dark Blue: #123181
+Gray Blue: #cdd9d9
+Bright Teal: #0dc0b0
+white: #fefefe
+*/
