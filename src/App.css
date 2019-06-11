@@ -57,6 +57,12 @@ h4 {
   letter-spacing: 5px;
 }
 
+p {
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding: 0;
+}
+
 li {
   list-style-type: none;
 }
@@ -66,35 +72,32 @@ html {
   font-size: 125%;
 }
 
-p {
-  letter-spacing: 1.5px;
-  margin: 0;
-  padding: 0;
+img,
+img:hover {
+  transition: all .5s;
 }
 
 img {
   height: 100%;
   max-width: 100%;
-  transition: transform .5s;
   width: 100%;
 }
 
 img:hover {
   transform: scale(1.25);
-  transition: all .5s;
   transform-origin: 50%;
   z-index: 1000;
 }
 
 img:focus {
-  border: 5px solid #0dc0b0;
+  border: 5px solid #0DC0B0;
 }
 
 button,
 input[type=submit] {
-  background-color:#0dc0b0;
-  border:none;
-  padding:1%;
+  background-color: #0DC0B0;
+  border: none;
+  padding: 1%;
   transition: background 0.5s ease;
 }
 
@@ -103,7 +106,7 @@ button:hover,
 input[type=submit]:hover,
 input[type=submit]:focus,
 input[type=submit]:active { 
-  background-color: #CDD9D9
+  background-color: #CDD9D9;
 }
 
 button:focus,
@@ -120,32 +123,34 @@ input[type=text] {
   background-color: #fefefe;
 }
 
-input[type=text]:focus, 
-input[type=text]:active {
-  border: 2px solid #CDD9D9;
-}
-
 .wrapper {
-  /* placeholder values for margin. please feel free to adjust it! */
   padding: 0 10%;
 }
 
 /* react-slick dot and arrow styling. */
+.slick-dots li button::before,
+.slick-next:before,
+.slick-prev:before {
+  color: #CDD9D9;
+}
+
+.slick-dots li.slick-active button::before,
+.slick-next:before,
+.slick-prev:before {
+  color: #0DC0B0;
+}
+
 .slick-dots li button::before {
   font-size: .8rem;
-  color: #CDD9D9;
   opacity: 0.7;
 }
 
 .slick-dots li.slick-active button::before {
-  /* color: #CDD9D9; */
-  color: #0DC0B0;
   opacity: 1;
 }
 
 .slick-next:before,
 .slick-prev:before {
-  color: #CDD9D9;
   font-size: 2.5rem;
 }
 
@@ -170,21 +175,37 @@ input[type=text]:active {
 /* =============================================== */
 /* Header */
 /* =============================================== */
+/* header common/ similar styling */
+.hero,
+.heroContent,
+.headerSearchBar,
+.showResults,
+.showModal {
+  display: flex;
+}
+
+.hero,
+.heroContent,
+.showResults {
+  flex-direction: column;
+}
+
+.hero,
+.showResults {
+  justify-content: center;
+}
+
 .hero {
   background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   position: relative;
-  /* height: 100vh; */
   width:100%;
 }
 
 .heroOverlay {
-  position: absolute;
   background: rgba(0, 0, 0, .7);
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -193,8 +214,6 @@ input[type=text]:active {
 }
 
 .heroContent {
-  display: flex;
-  flex-direction: column;
   position: relative;
 }
 
@@ -204,18 +223,16 @@ input[type=text]:active {
 
 .appInfo, 
 .searchForm {
-  width:50%;
+  width: 50%;
 }
 
 .headerSearchBar {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin: 5% 0;
 }
 
 .searchForm {
-  width:50%;
   text-align: right;
 }
 
@@ -227,18 +244,10 @@ input[type=text]:active {
   width: 27%;
 }
 
-.showResults {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .showPoster {
-  height:300px;
+  height: 300px;
   overflow: hidden;
-  /* padding: 0% 2%; */
   transition: all ease-in .5s;
-  width:200px;
 }
 
 .showPoster:active,
@@ -263,11 +272,10 @@ input[type=text]:active {
 
 .showModal {
   background-color: #CDD9D9;
-  display: flex;
-  padding: 2%;
   margin: 2% auto;
+  padding: 2.5%;
   position: relative;
-  width:60%;
+  width: 60%;
   z-index: 1000;
 }
 
@@ -279,68 +287,90 @@ input[type=text]:active {
 }
 
 .modalText {
-  width: 100%;
   padding: 2.5%;
+  width: 100%;
 }
 
-.modalButtons {
-  margin-top: 5%;
+.clickClose,
+.clickClose:hover {
+  transition: all ease-in .5s;
 }
 
 .clickClose {
-  top: 0;
-  right: 0;
-  padding: 2%;
+  background: none;
+  color: #0DC0B0;
+  font-size: 1.2rem;
+  /* fix X button */
+  top: 2.5%;
+  right: 2.5%;
   position: absolute;
+}
+
+.clickClose:hover {
+  transform: scale(1.5);
 }
 
 .clickAdd {
   padding: 2%;
 }
 
-.modalText p{
-  width: 100%;
-  height: 200px;
+.modalButtons,
+.modalText p {
   margin-top: 5%;
+}
+
+.modalText p{
+  /* height has to be set to px value */
+  height: 200px;
   overflow: auto;
+  width: 100%;
 }
 
 /* =============================================== */
 /* List Creator */
 /* =============================================== */
+.listCreatorForm,
+.showSelection,
+.showSelection li{
+  display: flex;
+}
+
+.formWrapper,
+.listCreatorForm,
+.showSelection {
+  margin: 0% auto;
+}
+
+
+.listCreatorForm input[type=text],
+.listCreatorForm input[type=submit] {
+  box-shadow: 2.5px 2.5px 5px #404040;
+}
+
+
 .listWrapper {
   background-color: rgba(205, 217, 217, .5);
   border-radius: 10px;
   margin: 5% 0%;
-  /* margin-top: 3%; */
   padding: 2.5% 2.5% 0%;
-  width: 100%;
 }
 
 .formWrapper {
   height: 10%;
-  margin: 0 auto;
   overflow: auto;
   transition: all ease-in .5s;
-  width: 100%;
 }
 
 .emptyList {
-  /* color: #0DC0B0; */
   font-size: 1.25rem;
   margin: 2% auto;
   text-align: center;
-  /* text-shadow: 2.5px 2.5px 2px #000000; */
-  width:100%;
 }
 
 .listCreatorForm{
-  width:99%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
   align-items: space-between;
-
+  justify-content: space-between;
+  width: 99%;
 }
 
 .listCreatorForm input[type=submit],
@@ -350,8 +380,6 @@ input[type=text]:active {
 }
 
 .listCreatorForm input[type=text] {
-  /* border: 2px solid #cdd9d9; */
-  box-shadow: 2.5px 2.5px 5px #404040;
   width: 30%;
 }
 
@@ -361,24 +389,22 @@ input[type=text]:active {
 
 .listCreatorForm input[type=text]:active,
 .listCreatorForm input[type=text]:focus {
-  border: 2px solid #0dc0b0;
+  border: 2px solid #0DC0B0;
 }
 
 .listCreatorForm input[type=submit] {
-  box-shadow: 2.5px 2.5px 5px #404040;
   width: 20%;
 }
 
 .showSelection {
-  width:100%;
-  height:100px;
-  margin:0 auto;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 100px;
   justify-content: space-between;
+  width: 100%;
 }
 
+/* retune this to the same as the community list. */
 .showSelection li{
   font-family: 'Fjalla One', sans-serif;
   font-size: 1.2rem;
@@ -386,11 +412,9 @@ input[type=text]:active {
   background-color:#141414;
   color: #cdd9d9;
   border: 1px solid #fefefe;
-  /* border-radius: 10px; */
   margin: 5px;
   padding: 2px;
   width: 48%;
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -399,13 +423,13 @@ input[type=text]:active {
 
 .showSelection li:hover {
   color:#141414;
-  background-color:#cdd9d9;
+  background-color:#CDD9D9;
 }
 
 .removeButton {
   background: url(./assets/removeTrashCan.png) center/ contain no-repeat;
-  padding:2%;
-  margin:1%;
+  padding: 2%;
+  margin: 1%;
 }
 
 .removeButton:hover,
@@ -413,13 +437,6 @@ input[type=text]:active {
 .removeButton:focus {
   background: url(./assets/removeTrashCanBlack.png) center/ contain no-repeat;
 }
-
-/* Colors
-Dark Blue: #123181
-Gray Blue: #cdd9d9
-Bright Teal: #0dc0b0
-white: #fefefe
-*/
 
 /* =============================================== */
 /* Community */
@@ -554,44 +571,41 @@ button.downvote:hover {
 /* =============================================== */
 /* Footer */
 /* =============================================== */
+/* footer common/ similar styling */
+.footerStyling,
+.subFooterStyling,
+.subFooterH2 {
+  display: flex;
+}
+
 .footer {
   background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
   background-size: cover;
   background-position: center;
   padding: .2rem 0;
-  color: #cdd9d9;
+  color: #CDD9D9;
   font-size: .8rem;
 }
-/* Stuff */
+
 .footerStyling {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   text-transform: capitalize;
-  /* text-align: center; */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .subFooterStyling {
-  width: 48%;
-  display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.subFooterH2 h2{
+.footerH2 {
   text-transform: capitalize;
   font-size: .9rem;
-  display: flex;
   justify-content: flex-end;
 }
 
-.subFooterLinks {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.footerTextInlineBlock {
-  display: inline-block;
+.linksH2 {
+  margin-left: .5rem;
 }
 
 a {
@@ -601,14 +615,13 @@ a {
 a:link,
 a:visited {
   color: #cdd9d9;
-	border-bottom: 2px solid transparent;
-	transition: border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
 }
 
 a:hover,
 a:active {
-	border-bottom: 2px solid #e40015;
-  /* height: 100vh; */
+    border-bottom: 2px solid #e40015;
 }
 
 /* =============================================== */
@@ -618,13 +631,21 @@ a:active {
 @media (max-width: 940px) {
   .headerSearchBar {
     flex-direction: column;
-    margin: 3% 0;
   }
 
-  .appInfo,
   .searchForm {
-    text-align: center;
+    text-align: none;
+    margin-top: 1rem;
     width: 100%;
+  }
+
+  .startCreator {
+    width: 50%;
+  }
+
+  .completeList {
+    width: 100%;
+    display: block;
   }
 
   .slogan {
@@ -637,6 +658,10 @@ a:active {
 
   .searchForm input[type=submit] {
     width: 30%;
+  }
+
+  .showModal {
+    width: 100%;
   }
 }
 
@@ -652,6 +677,18 @@ a:active {
   .completeList {
     width: 100%;
   }
+}
+
+@media (max-width: 765px) {
+  .subFooterStyling{
+    flex-direction: column;
+    margin-top: .5rem;
+  }
+
+  .footerH2 {
+    justify-content: flex-start;
+  }
+  
 }
 
 @media (max-width: 730px) {
@@ -670,7 +707,21 @@ a:active {
   .listCreatorForm input[type=submit] {
     width: 40%;
   }
+}
 
+@media (max-width: 600px) {
+  .startCreator {
+    margin-top: 10%;
+    width: 75%;
+  }
+
+  .slick-next:before,
+  .slick-prev:before,
+  .slick-next,
+  .slick-prev,
+  .slick-arrow  {
+    display: none !important;
+  }
 }
 
 @media (max-width: 440px) {
