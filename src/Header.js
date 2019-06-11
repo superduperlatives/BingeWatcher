@@ -51,7 +51,7 @@ class Header extends Component {
             
             isEmptyList: true,
 
-            isSubmittedShown: false
+            isSubmittedShown: false,
 
             activeTrap: false
         }
