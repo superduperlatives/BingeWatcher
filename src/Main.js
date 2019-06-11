@@ -209,13 +209,13 @@ class Main extends Component {
                                                             className="upvote"
                                                             onClick={this.valueIncrease}
                                                             value={index}>
-                                                                +
+                                                                &#128077; 
                                                         </button>
                                                         <button
                                                             className="downvote"
                                                             onClick={this.valueDecrease}
                                                             value={index}>
-                                                                -
+                                                                &#128078; 
                                                         </button>
                                                     </div>
                                                 </div>
