@@ -1,74 +1,51 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from './firebase.js';
+import UserList from './UserList.js';
 import Slider from 'react-slick';
 import swal from 'sweetalert';
 import FocusTrap from 'focus-trap-react'
-
-class UserList extends Component {
-    render(){
-        return(
-            <ul className="showSelection">
-                {/* go into showTitle... map over it... for every show... add an index...? */}
-                {this.props.showTitle.map((show, index) => {
-                    return (
-                        <li key={index}>
-                            <p>{show.title}</p>
-                            <button 
-                                className="removeButton"
-                                onClick={()=> this.props.removeShow(index)}>
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>
-        )
-    }
-}
 
 class Header extends Component {
     constructor() {
         super();
         this.state = {
-            // binding out input
+            // binding input of search bar
             userInput: "",
             // storing our user's search input
             userSearch: "",
-            // data gathered from API and shoved into this box
+            // data gathered from API 
             showsArray: [],
-            // this is where we're going to put all our gathered info of the show
+            // storing the data that will be printed to the DOM
             showsInfo: {},
-            // is the modal initially shown? no.
+            // controls the visibility of the modal
             isModalShown: false,
-            // tv shows that the user is adding to their list 
+            // stores the TV shows that the user adds to their list
             userTvShows: [],
-            // binding the input for user title 
+            // binding the input of user's list title
             userSubmitTitle: "",
-
+            // stores the tv show ids of the user's list
             idArray: [],
-
+            // controls the visibility of the list creator
             isListCreatorShown: false,
-            
+            // controls the default message of the list creator
             isEmptyList: true,
-
-            isSubmittedShown: false,
-
+            // for accessibility 
             activeTrap: false
         }
     }
     
-    // this is where we start making the random API call
+    // random number generator for listing tv shows 
     randomNumber = (min, max) => {
         let num = Math.floor(Math.random() * (max - min)) + min;
         return num;
     }
 
+    // based on the random number generator, calls API with a random keyword to print TV shows to the DOM when the page loads
     componentDidMount() {
-
         const starterShows = ['comedy', 'food', 'horror', 'action', 'drama', 'love', 'anime', 'disney']
-
         const randNum = this.randomNumber(0, starterShows.length)
-
+        // calls the API
         axios({
             method: 'GET',
             url: "http://api.tvmaze.com/search/shows",
@@ -77,35 +54,41 @@ class Header extends Component {
                 q: starterShows[randNum]
             }
         }).then(results => {
-            // only want the results that have an image
+            // only want the results that have an image and summary
             const filteredStarterData = results.data.filter(item =>
                 item.show.image != null && item.show.summary != null)
-
-            // console.log(filteredData)
-
+            // store the filter data in state
             this.setState({
                 showsArray: filteredStarterData
             })
 
         }).catch(error => {
-            console.log('error')
+            swal({
+                title: "Sorry! We failed to get data back from our API at this time. Please check back later!",
+                icon: "warning",
+                button: "Try Again"
+            });
         })
     }
 
+    //binds the input
     handleChange = event => {
-	this.setState({
-		userInput: event.target.value
-	})
-}
+        this.setState({
+            userInput: event.target.value
+        })
+    }
 
+    // on click of the search button, stores user input in state and passes the user's input to the API call
     handleSearch = event => {
         event.preventDefault();
+        // error handling - checks if user has left search field blank and throws an alert
         if (this.state.userInput === '') {
             swal({
                 title: "Don't leave the text field empty!!",
                 icon: "warning",
                 button: "Nice.",
             });
+        // if user has filled out the input, store user's search parameters in state and call API
         } else {
             const userQuery = this.state.userInput;
 
@@ -117,6 +100,7 @@ class Header extends Component {
         }
     }
 
+    // calls Api to get tv shows based on user's keyword search
     searchShows = (userSearch) => {
         axios({
             method: 'GET',
@@ -126,46 +110,47 @@ class Header extends Component {
                 q: userSearch
             }
         }).then(results => {
-            // only want the results that have an image
-            console.log('results', results.data)
+            // if API cannot find any tv show matches based on user's search, ask user to search with another keyword
             if (results.data.length === 0) {
                 swal({
-                    title: `Sorry, we couldn't find any shows for you. Please try searching for another show`,
+                    title: `Sorry, we couldn't find any shows based on your search. Please try searching by another keyword`,
                     icon: "warning",
                     button: "Nice.",
                 });
+            // if API call returns results, filter out data that do not have an image or summary.
             } else {
                 const filteredData = results.data.filter(item =>
                     item.show.image != null && item.show.summary != null);
-
-                console.log(filteredData)
-
+                // store the filtered list in state
                 this.setState({
                     showsArray: filteredData
                 })
             }  
-
         }).catch(error => {
-            console.log('error')
+            swal({
+                title: "Sorry! We failed to get data back from our API at this time. Please check back later!",
+                icon: "warning",
+                button: "Try Again"
+            });
         })
     }
 
-    handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            this.showDetails(event)
+    // for accessibility - allows user to select a show on enter
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.showDetails(e)
         }
     }
 
-    // each click upon each show is re-updating the state.
+    // on click of image, targets the specific data info for the clicked on show, stores the info in state and then calls the handleDisplayModal to print info on DOM
     showDetails = (e) => {
         const title = e.target.getAttribute("data-title");
         const id = e.target.getAttribute("data-id");
         const dataSummary = e.target.getAttribute("data-summary");
         const image = e.target.getAttribute("data-image");
 
-
+        //regex to remove html tags embedded in tv show summaries
         const summary = dataSummary.replace(/<[^>]+>/g, '');
-
 
         this.setState ({
             showsInfo: {
@@ -179,6 +164,7 @@ class Header extends Component {
         })
     }
 
+    // shows the modal on the DOM 
     handleDisplayModal = () => {
         this.setState({
             isModalShown: true,
@@ -186,6 +172,7 @@ class Header extends Component {
         })
     }
 
+    // on click, hides the modal from the DOM
     closeModal = (e) => {
         e.preventDefault();
         this.setState({
@@ -194,6 +181,7 @@ class Header extends Component {
         })
     }
 
+    // on click, shows the list creator section on section on the DOM
     openListCreator = (e) => {
         e.preventDefault();
         this.setState({
@@ -201,88 +189,117 @@ class Header extends Component {
         })
     }
 
+    // on click, takes user's selected TV show and adds the selected TV show's info to userTvShows array stored in state
+    addToList = (e) => {
+        e.preventDefault();
 
-addToList = (e) => {
-	e.preventDefault();
+        // if user has less than 10 TV shows on their list (limits the user to selecting 10 TV shows per list)
+        if (this.state.userTvShows.length < 10) {
+            // store TV show's id for error handling (to ensure that the user does not add same TV show to their list twice)
+            const idArrayCopy = [...this.state.idArray]
 
-	if (this.state.userTvShows.length < 10) {
+            if (!idArrayCopy.includes(this.state.showsInfo.id)) {
+                idArrayCopy.push(this.state.showsInfo.id)
+            
+                // grabs the info about the clicked on show from showsInfo array in state
+                const showTitle = this.state.showsInfo.title
+                const showBackground = this.state.showsInfo.image
 
-		const idArrayCopy = [...this.state.idArray]
+                // assigns the TV show an initial value of 1 for voting system
+                const showValue = 1
 
-		// if (!idArrayCopy.includes(this.state.showsInfo.id)) {
-		// 	idArrayCopy.push(this.state.showsInfo.id)
+                // creates an object with TV show's title, value and image
+                const info = { title: showTitle, value: showValue, background: showBackground }
 
-			const showTitle = this.state.showsInfo.title
-            const showValue = 1
-            const showBackground = this.state.showsInfo.image
+                // makes copy of userTvShows to push user's selected TV show
+                const titleArray = [...this.state.userTvShows]
+                titleArray.push(info)
 
-			// we're grabbing shit from showTitle & showValue and shoving it into variable info
-			const info = { title: showTitle, value: showValue, background: showBackground }
-			// copy of userTVshows to update
-			const titleArray = [...this.state.userTvShows]
+                this.setState({
+                    userTvShows: titleArray,
+                    idArray: idArrayCopy,
+                    isListCreatorShown: true,
+                    isEmptyList: false
+                });
+            // if user has already added title to list, display sweet alert error
+            } else {
+                this.setState({
+                    isModalShown: false
+                });
 
-			titleArray.push(info)
+                swal({
+                    title: "Whoops you already this show to your list!",
+                    icon: "warning",
+                    button: "Nice.",
+                });
+            }
+        // if user tries to add more than 10 shows to their list, display sweet alert error
+        } else {
+            this.setState({
+                isModalShown: false
+            });
 
-			this.setState({
-				userTvShows: titleArray,
-                idArray: idArrayCopy,
-                isListCreatorShown: true,
-                isEmptyList: false
-			})
+            swal({
+                title: "You may only add up to 10 shows to your list!",
+                icon: "warning",
+                button: "Nice.",
+            });
+        }
+    }
 
-            console.log(this.state.idArray)
-
-	} else {
-        swal({
-            title: "You may only add up to 10 shows to your list!",
-            icon: "warning",
-            button: "Nice.",
-        });
-	}
-}
-
-    // function to remove a specific show (one show at a time) by index value
+    // removes a TV show off a user's list by passing in the index value of the show the user would like to remove
     removeShow = (showToRemove) => {
+        // copy of user's TV show list to make modification
         const showTitle = [...this.state.userTvShows]
 
+        // remove the TV show from the array
         showTitle.splice(showToRemove, 1)
         
+        // update state with the new array
         this.setState ({
             userTvShows: showTitle
         })
     }
 
-    handleSubmitChange = event => {
+    // binding the input of the user's list title
+    handleSubmitChange = (e) => {
         this.setState({
-            userSubmitTitle: event.target.value
+            userSubmitTitle: e.target.value
         })
     }        
     
-
+    //on click, checks if the user completed the form correctly and then sends the user's completed list to firebase
     submitList = (e) => {
         e.preventDefault()
-
+        // error handling - checks if user has added more than one TV show and entered a titled
         if (this.state.userTvShows.length != 0 && this.state.userSubmitTitle != '') {
             const userChosenTitle = this.state.userSubmitTitle;
 
-            // taking the entire list and title 
+            // takes user's entire list of TV shows and list title 
             const userConfirmedList = {
                 title: userChosenTitle,
                 userList: this.state.userTvShows
             }
-
             // reference to our firebase 
             const dbRef = firebase.database().ref();
 
-            // push our complete user list to firebase
+            // push user's completed list to firebase
             dbRef.push(userConfirmedList)
 
-            // clear the array for next list 
+            // clears the array for next list 
             this.setState({
                 userTvShows: [],
                 userSubmitTitle: '',
                 isSubmittedShown: true,
             })
+
+            // sweet alert confirmation that the user's list has been submitted and guides the user to check out the community lists
+            swal({
+                title: "Thank you for submitting your list! Vote for your favorite shows on our community boards below!",
+                icon: "success",
+                button: "Nice.",
+            })
+        
         } else {
             swal({
                 title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
@@ -425,13 +442,6 @@ addToList = (e) => {
                                             <p>Browse TV Shows by clicking on the titles and add to your list</p>
                                         </div>) : null}
 
-                                        {this.state.isSubmittedShown ? (
-                                            <div className="submittedListMessage">
-                                                <p>Thank you for submitting your list!
-                                                    Vote for your favorite shows on our community boards below!
-                                                </p>
-                                            </div>) : null
-                                        }
                                         <div className="userWrapper">
                                             <UserList
                                                 showTitle={this.state.userTvShows}
@@ -442,9 +452,6 @@ addToList = (e) => {
                                 </div>
                             </div>
                         ) : <button className="startCreator" onClick={this.openListCreator}>Click here to Build Your List</button>}
-
- 
-
                     </div>
             </header>
         )
