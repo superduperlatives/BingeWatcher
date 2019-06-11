@@ -538,7 +538,54 @@ button.downvote:hover {
   background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
   background-size: cover;
   background-position: center;
+  padding: .2rem 0;
+  color: #cdd9d9;
+  font-size: .8rem;
+}
+
+.footerStyling {
   display: flex;
   flex-direction: row;
-  /* height: 100vh; */
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  /* text-align: center; */
+}
+
+.subFooterStyling {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.subFooterH2 h2{
+  text-transform: capitalize;
+  font-size: .9rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subFooterLinks {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footerTextInlineBlock {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #cdd9d9;
+	border-bottom: 2px solid transparent;
+	transition: border-bottom 0.2s;
+}
+
+a:hover,
+a:active {
+	border-bottom: 2px solid #e40015;
 }
