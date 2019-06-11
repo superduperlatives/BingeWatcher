@@ -3,6 +3,7 @@ import axios from 'axios';
 import firebase from './firebase.js';
 import Slider from 'react-slick';
 import swal from 'sweetalert';
+import FocusTrap from 'focus-trap-react'
 
 class UserList extends Component {
     render(){
@@ -49,6 +50,7 @@ class Header extends Component {
             isListCreatorShown: false,
             
             isEmptyList: true,
+            activeTrap: false
         }
     }
     
@@ -146,6 +148,12 @@ class Header extends Component {
         })
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.showDetails(event)
+        }
+    }
+
     // each click upon each show is re-updating the state.
     showDetails = (e) => {
         const title = e.target.getAttribute("data-title");
@@ -171,14 +179,16 @@ class Header extends Component {
 
     handleDisplayModal = () => {
         this.setState({
-            isModalShown: true
+            isModalShown: true,
+            activeTrap: true
         })
     }
 
     closeModal = (e) => {
         e.preventDefault();
         this.setState({
-            isModalShown: false
+            isModalShown: false,
+            activeTrap: false
         })
     }
 
@@ -341,6 +351,8 @@ addToList = (e) => {
                                                 data-title={item.show.name}
                                                 data-image={item.show.image.original}
                                                 onClick={this.showDetails} 
+                                                onKeyPress={this.handleKeyPress}
+                                                tabIndex="0"
                                             />
                                         </div>
                                     })}
@@ -350,32 +362,34 @@ addToList = (e) => {
                         </div>
 
                         {this.state.isModalShown ? (
-                            <div className="modalWrapper">
-                                <div className="showModal">
-                                    <div className="modalImage">
-                                        <img
-                                            src={this.state.showsInfo.image}
-                                            alt={this.state.showsInfo.title}
-                                        />
-                                    </div>
-                                    <div className="modalText">
-                                        <h2>{this.state.showsInfo.title}</h2>
-                                        <p>{this.state.showsInfo.summary}</p>
-                                        <div className="modalButtons">
-                                            <button
-                                                className="clickAdd"
-                                                onClick={this.addToList}>
-                                                Add to List
-                                            </button>
-                                            <button
-                                                className="clickClose"
-                                                onClick={this.closeModal}>
-                                                X
-                                            </button>
+                            <FocusTrap>
+                                <div className="modalWrapper">
+                                    <div className="showModal">
+                                        <div className="modalImage">
+                                            <img
+                                                src={this.state.showsInfo.image}
+                                                alt={this.state.showsInfo.title}
+                                            />
+                                        </div>
+                                        <div className="modalText">
+                                            <h2>{this.state.showsInfo.title}</h2>
+                                            <p>{this.state.showsInfo.summary}</p>
+                                            <div className="modalButtons">
+                                                <button
+                                                    className="clickAdd"
+                                                    onClick={this.addToList}>
+                                                    Add to List
+                                                </button>
+                                                <button
+                                                    className="clickClose"
+                                                    onClick={this.closeModal}>
+                                                    X
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </FocusTrap>
                         ) : null}
                         
                         {this.state.isListCreatorShown ? (
