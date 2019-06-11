@@ -283,6 +283,11 @@ addToList = (e) => {
                 userSubmitTitle: '',
                 isSubmittedShown: true,
             })
+            swal({
+                title: "Thank you for submitting your list! Vote for your favorite shows on our community boards below!",
+                icon: "success",
+                button: "Nice.",
+            })
         } else {
             swal({
                 title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
@@ -425,13 +430,6 @@ addToList = (e) => {
                                             <p>Browse TV Shows by clicking on the titles and add to your list</p>
                                         </div>) : null}
 
-                                        {this.state.isSubmittedShown ? (
-                                            <div className="submittedListMessage">
-                                                <p>Thank you for submitting your list!
-                                                    Vote for your favorite shows on our community boards below!
-                                                </p>
-                                            </div>) : null
-                                        }
                                         <div className="userWrapper">
                                             <UserList
                                                 showTitle={this.state.userTvShows}

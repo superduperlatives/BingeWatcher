@@ -561,3 +561,34 @@ button.downvote:hover {
   flex-direction: row;
   /* height: 100vh; */
 }
+
+/* =============================================== */
+/* Media Queries */
+/* =============================================== */
+
+@media (max-width: 940px) {
+  .headerSearchBar {
+    flex-direction: column;
+    margin: 3% 0;
+  }
+
+  .appInfo,
+  .searchForm {
+    text-align: center;
+    width: 100%;
+  }
+
+  .slogan {
+    margin: 2% 0;
+  }
+
+  .searchForm input[type=text] {
+    width: 70%;
+  }
+
+  .searchForm input[type=submit] {
+    width: 30%;
+  }
+
+  
+}
