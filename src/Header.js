@@ -201,10 +201,11 @@ addToList = (e) => {
 		// 	idArrayCopy.push(this.state.showsInfo.id)
 
 			const showTitle = this.state.showsInfo.title
-			const showValue = 1
+            const showValue = 1
+            const showBackground = this.state.showsInfo.image
 
 			// we're grabbing shit from showTitle & showValue and shoving it into variable info
-			const info = { title: showTitle, value: showValue }
+			const info = { title: showTitle, value: showValue, background: showBackground }
 			// copy of userTVshows to update
 			const titleArray = [...this.state.userTvShows]
 
@@ -323,7 +324,8 @@ addToList = (e) => {
                         <input  
                             id="searchBar" 
                             onChange={this.handleChange}
-                            type="text">
+                            type="text"
+                            placeholder="Search">
                         </input>
                         <input 
                             onClick={this.handleSearch}
