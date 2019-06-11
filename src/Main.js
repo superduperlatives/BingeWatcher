@@ -176,7 +176,7 @@ class Main extends Component {
 
     render(){
         return(
-            <section className="communityList wrapper">
+            <section className="communityList wrapper" id="communityList">
                 <h2 className="communityListTitle">Community Lists</h2>
                 <div className="communityListContent">
                     {this.state.displayList.map((list, index) => {

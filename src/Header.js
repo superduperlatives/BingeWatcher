@@ -49,6 +49,9 @@ class Header extends Component {
             isListCreatorShown: false,
             
             isEmptyList: true,
+
+            isSubmittedShown: false
+
         }
     }
     
@@ -95,7 +98,6 @@ class Header extends Component {
 
     handleSearch = event => {
         event.preventDefault();
-
         if (this.state.userInput === '') {
             swal({
                 title: "Don't leave the text field empty!!",
@@ -261,9 +263,7 @@ addToList = (e) => {
     submitList = (e) => {
         e.preventDefault()
 
-        console.log(this.state.userTvShows)
-
-        if (this.state.userTvShows.length != 0) {
+        if (this.state.userTvShows.length != 0 && this.state.userSubmitTitle != '') {
             const userChosenTitle = this.state.userSubmitTitle;
 
             // taking the entire list and title 
@@ -280,16 +280,17 @@ addToList = (e) => {
 
             // clear the array for next list 
             this.setState({
-                userTvShows: []
+                userTvShows: [],
+                userSubmitTitle: '',
+                isSubmittedShown: true,
             })
         } else {
             swal({
-                title: "Add at least one show",
+                title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
                 icon: "warning",
-                button: "Nice.",
-            });
+                button: "Nice."
+            }); 
         }
-
     }
 
     render () {
@@ -393,7 +394,7 @@ addToList = (e) => {
                         {/* this is where we are going to append the modal on click? */}
 
                         <div className="listWrapper">
-                            <div className="formWrapper">
+                            <div className="formWrapper" id="formWrapper">
                                 <form
                                     className="listCreatorForm"
                                     action=""
@@ -402,19 +403,32 @@ addToList = (e) => {
                                         id="userListTitle"
                                         onChange={this.handleSubmitChange}
                                         type="text"
+                                        value={this.state.userSubmitTitle}
                                         placeholder="Name Your List"
                                     />
                                     <label htmlFor="userListTitle"></label>
                                     <input
                                         type="submit"
                                         value="Submit List"
+                                        onClick={this.submitList}
                                     />
                                 </form>
+
                                 {this.state.isEmptyList ? (
                                 <div className="emptyList">
                                     <p>You have not added any TV shows to your list yet.</p>
                                     <p>Browse TV Shows by clicking on the titles and add to your list</p>
-                                </div>) : null}
+                                </div>) : null
+                                }
+
+                                {this.state.isSubmittedShown ? (
+                                    <div className="submittedListMessage">
+                                        <p>Thank you for submitting your list!
+                                            Vote for your favorite shows on our community boards below!
+                                        </p>
+                                    </div>) : null
+                                }
+
                                 <div className="userWrapper">
                                     <UserList
                                         showTitle={this.state.userTvShows}
