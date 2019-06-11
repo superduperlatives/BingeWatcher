@@ -561,11 +561,10 @@ button.downvote:hover {
   color: #cdd9d9;
   font-size: .8rem;
 }
-
+/* Stuff */
 .footerStyling {
   display: flex;
   flex-direction: row;
-<<<<<<< HEAD
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
@@ -608,7 +607,5 @@ a:visited {
 a:hover,
 a:active {
 	border-bottom: 2px solid #e40015;
-=======
   /* height: 100vh; */
->>>>>>> b349bf05932808c87e805057b4fd2644809bf88f
 }
