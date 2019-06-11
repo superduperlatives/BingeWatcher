@@ -399,3 +399,17 @@ h1 {
 .votesButtons .downvote {
   background-color: firebrick;
 } 
+
+
+
+/* =============================================== */
+/* Footer */
+/* =============================================== */
+.footer {
+  background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+  /* height: 100vh; */
+}
