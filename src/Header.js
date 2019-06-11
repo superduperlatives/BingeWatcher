@@ -48,7 +48,7 @@ class Header extends Component {
         // calls the API
         axios({
             method: 'GET',
-            url: "http://api.tvmaze.com/search/shows",
+            url: "https://api.tvmaze.com/search/shows",
             dataResponse: 'json',
             params: {
                 q: starterShows[randNum]
@@ -104,7 +104,7 @@ class Header extends Component {
     searchShows = (userSearch) => {
         axios({
             method: 'GET',
-            url: "http://api.tvmaze.com/search/shows",
+            url: "https://api.tvmaze.com/search/shows",
             dataResponse: 'json',
             params: {
                 q: userSearch
@@ -292,20 +292,14 @@ class Header extends Component {
                 userSubmitTitle: '',
                 isSubmittedShown: true,
             })
-<<<<<<< HEAD
 
             // sweet alert confirmation that the user's list has been submitted and guides the user to check out the community lists
-=======
->>>>>>> f92acba29ff8be81a72c5a46fe16288bd512bc6d
             swal({
                 title: "Thank you for submitting your list! Vote for your favorite shows on our community boards below!",
                 icon: "success",
                 button: "Nice.",
             })
-<<<<<<< HEAD
-        
-=======
->>>>>>> f92acba29ff8be81a72c5a46fe16288bd512bc6d
+            
         } else {
             swal({
                 title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
