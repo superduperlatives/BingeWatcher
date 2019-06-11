@@ -398,19 +398,6 @@ addToList = (e) => {
                                     className="listCreatorForm"
                                     action=""
                                     onSubmit={this.submitList}>
-<<<<<<< HEAD
-                                <label htmlFor="userListTitle"></label>
-                                <input
-                                    id="userListTitle"
-                                    onChange={this.handleSubmitChange}
-                                    type="text"
-                                    placeholder="Give your list a name!"                                    
-                                />
-                                <input
-                                    type="submit"
-                                    value="Submit List"
-                                />
-=======
                                     <input
                                         id="userListTitle"
                                         onChange={this.handleSubmitChange}
@@ -422,7 +409,6 @@ addToList = (e) => {
                                         type="submit"
                                         value="Submit List"
                                     />
->>>>>>> 074264181aed74be1c8691288bdab03f60afb6c0
                                 </form>
                                 {this.state.isEmptyList ? (
                                 <div className="emptyList">
