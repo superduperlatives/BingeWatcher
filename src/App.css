@@ -402,13 +402,6 @@ input[type=text]:active {
   margin: 2% 0;
   border: none;
 }
-<<<<<<< HEAD
-.votesButtons .upvote {
-  background-color: green;
-} 
-.votesButtons .downvote {
-  background-color: firebrick;
-} 
 
 /* Create Your List */
 
@@ -527,7 +520,6 @@ Gray Blue: #cdd9d9
 Bright Teal: #0dc0b0
 white: #fefefe
 */
-=======
 
 button.upvote,
 button.downvote {
@@ -538,4 +530,3 @@ button.upvote:hover,
 button.downvote:hover {
   color: red;
 }
->>>>>>> communityList
