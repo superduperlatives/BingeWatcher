@@ -97,7 +97,11 @@ class Header extends Component {
         event.preventDefault();
 
         if (this.state.userInput === '') {
-            alert(`Don't leave the text field empty!!`)
+            swal({
+                title: "Don't leave the text field empty!!",
+                icon: "warning",
+                button: "Nice.",
+            });
         } else {
             const userQuery = this.state.userInput;
 
@@ -121,7 +125,11 @@ class Header extends Component {
             // only want the results that have an image
             console.log('results', results.data)
             if (results.data.length === 0) {
-                alert(`Sorry, we couldn't find any shows for you. Please try searching for another show`)
+                swal({
+                    title: `Sorry, we couldn't find any shows for you. Please try searching for another show`,
+                    icon: "warning",
+                    button: "Nice.",
+                });
             } else {
                 const filteredData = results.data.filter(item =>
                     item.show.image != null && item.show.summary != null);
@@ -262,7 +270,11 @@ addToList = (e) => {
                 userTvShows: []
             })
         } else {
-            alert("Add at least one show");
+            swal({
+                title: "Add at least one show",
+                icon: "warning",
+                button: "Nice.",
+            });
         }
 
     }
