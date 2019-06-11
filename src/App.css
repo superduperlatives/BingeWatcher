@@ -7,18 +7,14 @@ Bright Teal: #0dc0b0
 white: #fefefe
 */
 
+/* Fonts:
+font-family: 'Fjalla One', sans-serif;
+font-family: 'Lato', sans-serif; 
+*/
 
-/* FONTS:
-    font-family: 'Fjalla One', sans-serif;
-    font-family: 'Lato', sans-serif; */
-
-
-
-
-
-
-/* setup */
-/* /////////////////////////////////////////////////// */
+/* =============================================== */
+/* Setup */
+/* =============================================== */
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
 
 .clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
@@ -27,15 +23,16 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
-/* general */
-/* /////////////////////////////////////////////////// */
 
+/* =============================================== */
+/* General*/
+/* =============================================== */
 h1 {
-  color: #cdd9d9;
+  color: #0DC0B0;
+  text-shadow: 2px 2px 5px #000000;
   font-size: 3.5rem;
-  margin:0;
-  padding:0;
-  text-shadow: 4px 3px 0 #123181;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 h1,
@@ -70,8 +67,9 @@ html {
 }
 
 p {
-  margin:0; 
-  padding:0;
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding: 0;
 }
 
 img {
@@ -88,6 +86,9 @@ img:hover {
   z-index: 1000;
 }
 
+img:focus {
+  border: 5px solid #0dc0b0;
+}
 
 button,
 input[type=submit] {
@@ -97,16 +98,18 @@ input[type=submit] {
   transition: background 0.5s ease;
 }
 
+button:focus,
 button:hover,
-input[type=submit]:hover { 
+input[type=submit]:hover,
+input[type=submit]:focus,
+input[type=submit]:active { 
   background-color: #CDD9D9
 }
 
 button:focus,
 button:active,
-input[type=submit]:focus, 
-input[type=submit]:active  { 
-  background-color: #CDD9D9;
+input[type=submit]:focus,
+input[type=submit]:active { 
   border: 2px solid #CDD9D9;
 }
 
@@ -121,7 +124,6 @@ input[type=text]:focus,
 input[type=text]:active {
   border: 2px solid #CDD9D9;
 }
-
 
 .wrapper {
   /* placeholder values for margin. please feel free to adjust it! */
@@ -165,8 +167,9 @@ input[type=text]:active {
   width: 220px;
 }
 
-/* header */
-/* /////////////////////////////////////////////////// */
+/* =============================================== */
+/* Header */
+/* =============================================== */
 .hero {
   background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
   background-size: cover;
@@ -174,13 +177,29 @@ input[type=text]:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  position: relative;
+  /* height: 100vh; */
   width:100%;
+}
+
+.heroOverlay {
+  position: absolute;
+  background: rgba(0, 0, 0, .7);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .slogan {
   color: #CDD9D9;
-  font-size: 1rem;
 }
 
 .appInfo, 
@@ -192,7 +211,7 @@ input[type=text]:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2% 0;
+  margin: 5% 0;
 }
 
 .searchForm {
@@ -201,11 +220,11 @@ input[type=text]:active {
 }
 
 .searchForm input[type=text] {
-  width: 50%;
+  width: 58%;
 }
 
 .searchForm input[type=submit] {
-  width: 25%;
+  width: 27%;
 }
 
 .showResults {
@@ -229,25 +248,27 @@ input[type=text]:active {
 }
 
 .startCreator {
-  width: 25%;
+  border-radius: 10px;
   margin: 5% auto;
+  width: 25%;
 }
 
-/* modal styling */
-/* /////////////////////////////////////////////////// */
-
+/* =============================================== */
+/* Modal(s) */
+/* =============================================== */
 .modalWrapper {
-  margin: 0 auto;
+  margin: 0% auto;
   position: absolute;
 }
 
 .showModal {
+  background-color: #CDD9D9;
   display: flex;
-  width:60%;
   padding: 2%;
-  background-color: #cdd9d9;
-  margin: 0 auto;
+  margin: 2% auto;
   position: relative;
+  width:60%;
+  z-index: 1000;
 }
 
 .modalImage {
@@ -284,9 +305,125 @@ input[type=text]:active {
   overflow: auto;
 }
 
-/* section: community list section */
-/* /////////////////////////////////////////////////// */
+/* =============================================== */
+/* List Creator */
+/* =============================================== */
+.listWrapper {
+  background-color: rgba(205, 217, 217, .5);
+  border-radius: 10px;
+  margin: 5% 0%;
+  /* margin-top: 3%; */
+  padding: 2.5% 2.5% 0%;
+  width: 100%;
+}
 
+.formWrapper {
+  height: 10%;
+  margin: 0 auto;
+  overflow: auto;
+  transition: all ease-in .5s;
+  width: 100%;
+}
+
+.emptyList {
+  /* color: #0DC0B0; */
+  font-size: 1.25rem;
+  margin: 2% auto;
+  text-align: center;
+  /* text-shadow: 2.5px 2.5px 2px #000000; */
+  width:100%;
+}
+
+.listCreatorForm{
+  width:99%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+
+}
+
+.listCreatorForm input[type=submit],
+.listCreatorForm input[type=text] {
+  padding: 0.5%;
+  margin-bottom: 1%;
+}
+
+.listCreatorForm input[type=text] {
+  /* border: 2px solid #cdd9d9; */
+  box-shadow: 2.5px 2.5px 5px #404040;
+  width: 30%;
+}
+
+.listCreatorForm input[type=text]::placeholder {
+  opacity: 1;
+}
+
+.listCreatorForm input[type=text]:active,
+.listCreatorForm input[type=text]:focus {
+  border: 2px solid #0dc0b0;
+}
+
+.listCreatorForm input[type=submit] {
+  box-shadow: 2.5px 2.5px 5px #404040;
+  width: 10%;
+}
+
+.showSelection {
+  width:100%;
+  height:100px;
+  margin:0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.showSelection li{
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.2rem;
+  display:block;
+  background-color:#141414;
+  color: #cdd9d9;
+  border: 1px solid #fefefe;
+  /* border-radius: 10px; */
+  margin: 5px;
+  padding: 2px;
+  width: 49%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+.showSelection li:hover {
+  color:#141414;
+  background-color:#cdd9d9;
+}
+
+.removeButton {
+  background: url(./assets/removeTrashCan.png) center/ contain no-repeat;
+  padding:2%;
+  margin:1%;
+}
+
+.removeButton:hover,
+.removeButton:active,
+.removeButton:focus {
+  background: url(./assets/removeTrashCanBlack.png) center/ contain no-repeat;
+}
+
+/* Colors
+Dark Blue: #123181
+Gray Blue: #cdd9d9
+Bright Teal: #0dc0b0
+white: #fefefe
+*/
+
+/* =============================================== */
+/* Community */
+/* =============================================== */
 /* community common/ similar styling */
 .communityListContent,
 .completeList,
@@ -313,7 +450,7 @@ input[type=text]:active {
 }
 
 .communityListTitle {
-  padding: 2%;
+  padding-top: 5%;
 }
 
 .communityList {
@@ -402,124 +539,6 @@ input[type=text]:active {
   margin: 2% 0;
   border: none;
 }
-
-/* Create Your List */
-
-
-/* =============================================== */
-/* List Creator */
-/* =============================================== */
-
-.listWrapper {
-  width:100%;
-  background-color: rgba(20, 20, 20, 0.9);
-  color: #cdd9d9;
-  margin-top: 3%;
-  padding:2%;
-}
-
-.formWrapper {
-  width: 100%;
-  height: 175px;
-  margin: 0 auto;
-  overflow: auto;
-  transition: all ease-in .5s;
-  
-}
-
-.emptyList {
-  width:100%;
-  margin: 2% auto;
-  text-align: center;
-}
-
-.listCreatorForm{
-  width:99%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: space-between;
-
-}
-
-.listCreatorForm input[type=submit],
-.listCreatorForm input[type=text] {
-  padding: 0.5%;
-  margin-bottom: 1%;
-}
-
-.listCreatorForm input[type=text] {
-  width: 30%;
-  color: #cdd9d9;
-  border: 2px solid #cdd9d9;
-  background-color:#141414;
-}
-
-.listCreatorForm input[type=text]::placeholder {
-  opacity: 1;
-}
-
-.listCreatorForm input[type=text]:active,
-.listCreatorForm input[type=text]:focus {
-  border: 2px solid #0dc0b0;
-}
-
-.listCreatorForm input[type=submit] {
-  width: 20%;
-}
-
-.showSelection {
-  width:100%;
-  height:100px;
-  margin:0 auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.showSelection li{
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 1.2rem;
-  display:block;
-  background-color:#141414;
-  color: #cdd9d9;
-  border: 1px solid #fefefe;
-  /* border-radius: 10px; */
-  margin: 5px;
-  padding: 2px;
-  width: 49%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.5s ease;
-}
-
-.showSelection li:hover {
-  color:#141414;
-  background-color:#cdd9d9;
-}
-
-.removeButton {
-  background: url(./assets/removeTrashCan.png) center/ contain no-repeat;
-  padding:2%;
-  margin:1%;
-}
-
-.removeButton:hover,
-.removeButton:active,
-.removeButton:focus {
-  background: url(./assets/removeTrashCanBlack.png) center/ contain no-repeat;
-}
-
-
-/* Colors
-Dark Blue: #123181
-Gray Blue: #cdd9d9
-Bright Teal: #0dc0b0
-white: #fefefe
-*/
 
 button.upvote,
 button.downvote {
