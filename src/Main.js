@@ -4,7 +4,6 @@ import firebase from './firebase.js'
 class Main extends Component {
     constructor(){
         super()
-
         this.state = {
             displayList: [],
         }
@@ -27,7 +26,6 @@ class Main extends Component {
 
             // let completeSortedArray = []
             
-        
             for (let object in data) {
                 // console.log(data[object])
                 let sortedArray = []
@@ -51,10 +49,7 @@ class Main extends Component {
             //     })
             // }
 
-            
             //pull down sorted data
-
-
 
             // let every key in firebase..state. we want to push the following data: id/ userListObject...
             for (let key in data) {
@@ -64,17 +59,7 @@ class Main extends Component {
                     userListObject: data[key]
                 })
             }
-
             // console.log(newState)
-
-            // newState.map((item, index) => {
-            //     item.userListObject.userList.sort((a, b) => {
-            //         if (a.value > b.value) return -1;
-            //         if (a.value < b.value) return 1;
-            //         return 0;
-            //     });
-            // })
-
             // console.log(sortedState)
 
             // we update the state so we can call it/ render it 
@@ -93,7 +78,6 @@ class Main extends Component {
         const firebaseKey = event.target.closest('.completeList').getAttribute('data-key');
         // console.log(firebaseKey);
 
-        
         const dbRef = firebase.database().ref(); 
         
         // variable copy makes a copy of the current state of display list
@@ -102,6 +86,7 @@ class Main extends Component {
         const target = event.target.value
         // console.log(target)
         // console.log(this.state.displayList)
+
         // variable create: event.target is the button we are clicking on... (upvote button). when we use .closest... we are going to go up the parent tree until it finds the element with the class .completeList. Once we find the element of .completeList... get the attribute of data-id and return a value to us?
         const parentDiv = event.target.closest('.completeList').getAttribute('data-id');
         const keyValue = event.target.closest('.completeList').getAttribute('data-key');
@@ -128,17 +113,11 @@ class Main extends Component {
                     if (key === keyValue) {
                         dbRef.child(key).child('userList').child(target).update({
                             value: this.state.displayList[parentDiv].userListObject.userList[target].value
-                        })
-                        
+                        }) 
                     }
-                    
                 }
-                
             })
-
-                
         })
-        
     }
 
     // exact same function as valueIncrease but decreases
@@ -153,39 +132,63 @@ class Main extends Component {
         
         const counter = currentVoteValue - 1;
 
-        copy[parentDiv].userListObject.userList[target].value = counter;
+        if (currentVoteValue > 0) {
+            copy[parentDiv].userListObject.userList[target].value = counter;
 
-        this.setState({
-            displayList: copy,
-        }, () => {
-            const dbRef = firebase.database().ref()
+            this.setState({
+                displayList: copy,
+            }, () => {
+                const dbRef = firebase.database().ref()
 
-            dbRef.once('value', (response) => {
-                const newData = response.val()
+                dbRef.once('value', (response) => {
+                    const newData = response.val()
 
-                for (let key in newData) {
-                    if (key === keyValue) {
-                        dbRef.child(key).child('userList').child(target).update({
-                            value: this.state.displayList[parentDiv].userListObject.userList[target].value
-                        })
+                    for (let key in newData) {
+                        if (key === keyValue) {
+                            dbRef.child(key).child('userList').child(target).update({
+                                value: this.state.displayList[parentDiv].userListObject.userList[target].value
+                            })
+                        }
                     }
-                }
+                })
             })
-        })
+        }else {
+            alert("Vote Count Cannot Be Less Than Zero.")
+        }
+
+        // copy[parentDiv].userListObject.userList[target].value = counter;
+
+        // this.setState({
+        //     displayList: copy,
+        // }, () => {
+        //     const dbRef = firebase.database().ref()
+
+        //     dbRef.once('value', (response) => {
+        //         const newData = response.val()
+
+        //         for (let key in newData) {
+        //             if (key === keyValue) {
+        //                 dbRef.child(key).child('userList').child(target).update({
+        //                     value: this.state.displayList[parentDiv].userListObject.userList[target].value
+        //                 })
+        //             }
+        //         }
+        //     })
+        // })
     }
 
     render(){
         return(
-            <section className="communityList wrapper">
+            <section className="communityList wrapper" id="communityList">
                 <h2 className="communityListTitle">Community Lists</h2>
                 <div className="communityListContent">
                     {this.state.displayList.map((list, index) => {
                         return(
                             <div 
-                            className="completeList" 
-                            data-id={index} 
-                            data-key={list.id}
-                            key={list.id}>
+                                className="completeList" 
+                                data-id={index} 
+                                data-key={list.id}
+                                key={list.id}>
                                 <h3>{list.userListObject.title}</h3>
                                 <ul>
                                     {list.userListObject.userList.map((show, index)=> {
@@ -194,8 +197,8 @@ class Main extends Component {
                                             key={index} 
                                             className="titleVoteContent">
                                                 <div 
-                                                className="showHeading"
-                                                style={{backgroundImage: `url(${show.background})`}}>
+                                                    className="showHeading"
+                                                    style={{backgroundImage: `url(${show.background})`}}>
                                                     <h4>{show.title}</h4>
                                                     <div className="overlay"></div>
                                                 </div>
@@ -225,7 +228,6 @@ class Main extends Component {
                     })}
                 </div>
             </section>
-            
         )
     }
 }
