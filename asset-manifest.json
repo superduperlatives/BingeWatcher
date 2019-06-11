@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "%20//superduperlatives.github.io/BingeWatcher/static/css/main.d882ab9f.chunk.css",
-    "main.js": "%20//superduperlatives.github.io/BingeWatcher/static/js/main.c3e3d2d8.chunk.js",
-    "main.js.map": "%20//superduperlatives.github.io/BingeWatcher/static/js/main.c3e3d2d8.chunk.js.map",
-    "runtime~main.js": "%20//superduperlatives.github.io/BingeWatcher/static/js/runtime~main.92bce111.js",
-    "runtime~main.js.map": "%20//superduperlatives.github.io/BingeWatcher/static/js/runtime~main.92bce111.js.map",
-    "static/js/2.afdee2d4.chunk.js": "%20//superduperlatives.github.io/BingeWatcher/static/js/2.afdee2d4.chunk.js",
-    "static/js/2.afdee2d4.chunk.js.map": "%20//superduperlatives.github.io/BingeWatcher/static/js/2.afdee2d4.chunk.js.map",
-    "index.html": "%20//superduperlatives.github.io/BingeWatcher/index.html",
-    "precache-manifest.0b5a8702772382b4b9d6ee3adab09800.js": "%20//superduperlatives.github.io/BingeWatcher/precache-manifest.0b5a8702772382b4b9d6ee3adab09800.js",
-    "service-worker.js": "%20//superduperlatives.github.io/BingeWatcher/service-worker.js",
-    "static/css/main.d882ab9f.chunk.css.map": "%20//superduperlatives.github.io/BingeWatcher/static/css/main.d882ab9f.chunk.css.map",
-    "static/media/App.css": "%20//superduperlatives.github.io/BingeWatcher/static/media/tvPosterCollageTwoMin.c9fd57d2.jpg"
+    "main.css": "/BingeWatcher/static/css/main.d2cad7c0.chunk.css",
+    "main.js": "/BingeWatcher/static/js/main.a7d2550c.chunk.js",
+    "main.js.map": "/BingeWatcher/static/js/main.a7d2550c.chunk.js.map",
+    "runtime~main.js": "/BingeWatcher/static/js/runtime~main.a908e685.js",
+    "runtime~main.js.map": "/BingeWatcher/static/js/runtime~main.a908e685.js.map",
+    "static/js/2.8104f66b.chunk.js": "/BingeWatcher/static/js/2.8104f66b.chunk.js",
+    "static/js/2.8104f66b.chunk.js.map": "/BingeWatcher/static/js/2.8104f66b.chunk.js.map",
+    "index.html": "/BingeWatcher/index.html",
+    "precache-manifest.77f3de58e37803df4136685c5f4b4670.js": "/BingeWatcher/precache-manifest.77f3de58e37803df4136685c5f4b4670.js",
+    "service-worker.js": "/BingeWatcher/service-worker.js",
+    "static/css/main.d2cad7c0.chunk.css.map": "/BingeWatcher/static/css/main.d2cad7c0.chunk.css.map",
+    "static/media/App.css": "/BingeWatcher/static/media/tvPosterCollageTwoMin.c9fd57d2.jpg"
   }
 }
