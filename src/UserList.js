@@ -1,5 +1,6 @@
 import React from 'react';
 
+// prints user's selected TV shows to the page
 const UserList = (props) => {
     return (
         <ul className="showSelection">

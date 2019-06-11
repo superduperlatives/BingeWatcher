@@ -299,7 +299,7 @@ class Header extends Component {
                 icon: "success",
                 button: "Nice.",
             })
-            
+        // error handling - if user has not completed their list, display error message
         } else {
             swal({
                 title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
@@ -329,130 +329,125 @@ class Header extends Component {
 
         return (
             <header className="hero wrapper">
-
                 {this.state.isModalShown ?
-                (<div className="heroOverlay"></div>) : null 
+                    (<div className="heroOverlay"></div>) : null 
                 }
 
-                    <div className="heroContent">
-                        <div className="headerSearchBar">
-                            <div className="appInfo">
-                                <h1>Binge Watchers</h1>
-                                <p className="slogan">Make a TV show list for your next binge</p>
-                            </div>
-                            
-                            <form action="" className="searchForm">
-                                <label htmlFor="searchBar"></label>
-                                <input  
-                                    id="searchBar" 
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    placeholder="eg. transformers, top gear, brooklyn 99... ">
-                                </input>
-                                <input  
-                                    onClick={this.handleSearch}
-                                    type="submit" 
-                                    value="Search">
-                                </input>
-                            </form>
+                <div className="heroContent">
+                    <div className="headerSearchBar">
+                        <div className="appInfo">
+                            <h1>Binge Watchers</h1>
+                            <p className="slogan">Make a TV show list for your next binge</p>
                         </div>
+                        
+                        <form action="" className="searchForm">
+                            <label htmlFor="searchBar"></label>
+                            <input  
+                                id="searchBar" 
+                                onChange={this.handleChange}
+                                type="text"
+                                placeholder="eg. transformers, top gear, brooklyn 99... ">
+                            </input>
+                            <input  
+                                onClick={this.handleSearch}
+                                type="submit" 
+                                value="Search">
+                            </input>
+                        </form>
+                    </div>
 
-                        <div className="showLists animated fadeInUp">
-                            <div className="showResults">
-                                <Slider {...settings}>
-
-                                    { this.state.showsArray.map ((item, key) => {
-                                        return <div key={item.show.id} className="showPoster">
-                                            <img
-                                                src={item.show.image.original}
-                                                alt=""
-                                                data-id={item.show.id}
-                                                data-summary={item.show.summary}
-                                                data-title={item.show.name}
-                                                data-image={item.show.image.original}
-                                                onClick={this.showDetails} 
-                                                onKeyPress={this.handleKeyPress}
-                                                tabIndex="0"
-                                            />
-                                        </div>
-                                    })}
-
-                                </Slider>
-                            </div>
+                    <div className="showLists animated fadeInUp">
+                        <div className="showResults">
+                            <Slider {...settings}>
+                                {this.state.showsArray.map ((item, key) => {
+                                    return <div key={item.show.id} className="showPoster">
+                                        <img
+                                            src={item.show.image.original}
+                                            alt=""
+                                            data-id={item.show.id}
+                                            data-summary={item.show.summary}
+                                            data-title={item.show.name}
+                                            data-image={item.show.image.original}
+                                            onClick={this.showDetails} 
+                                            onKeyPress={this.handleKeyPress}
+                                            tabIndex="0"
+                                        />
+                                    </div>
+                                })}
+                            </Slider>
                         </div>
+                    </div>
 
-
-                        {this.state.isModalShown ? (
-                            <FocusTrap>
-                                <div className="modalWrapper">
-                                    <div className="showModal">
-                                        <div className="modalImage">
-                                            <img
-                                                src={this.state.showsInfo.image}
-                                                alt={this.state.showsInfo.title}
-                                            />
-                                        </div>
-                                        <div className="modalText">
-                                            <h2>{this.state.showsInfo.title}</h2>
-                                            <p>{this.state.showsInfo.summary}</p>
-                                            <div className="modalButtons">
-                                                <button
-                                                    className="clickAdd"
-                                                    onClick={this.addToList}>
-                                                    Add to List
-                                                </button>
-                                                <button
-                                                    className="clickClose"
-                                                    onClick={this.closeModal}>
-                                                    X
-                                                </button>
-                                            </div>
+                    {this.state.isModalShown ? (
+                        <FocusTrap>
+                            <div className="modalWrapper">
+                                <div className="showModal">
+                                    <div className="modalImage">
+                                        <img
+                                            src={this.state.showsInfo.image}
+                                            alt={this.state.showsInfo.title}
+                                        />
+                                    </div>
+                                    <div className="modalText">
+                                        <h2>{this.state.showsInfo.title}</h2>
+                                        <p>{this.state.showsInfo.summary}</p>
+                                        <div className="modalButtons">
+                                            <button
+                                                className="clickAdd"
+                                                onClick={this.addToList}>
+                                                Add to List
+                                            </button>
+                                            <button
+                                                className="clickClose"
+                                                onClick={this.closeModal}>
+                                                X
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </FocusTrap>
-                        ) : null}
-                        
-                        {this.state.isListCreatorShown ? (
-                            <div className="listCreator">
-                                {/* this is where we are going to append the modal on click? */}
-
-                                <div className="listWrapper animated fadeInUp">
+                            </div>
+                        </FocusTrap>
+                    ) : null}
+                    
+                    {this.state.isListCreatorShown ? (
+                        <div className="listCreator">
+                            <div className="listWrapper animated fadeInUp">
                                 <div className="formWrapper animated fadeInUp" id="formWrapper">
-                                        <form
-                                            className="listCreatorForm"
-                                            action=""
-                                            onSubmit={this.submitList}>
-                                            <input
-                                                id="userListTitle"
-                                                onChange={this.handleSubmitChange}
-                                                type="text"
-                                                value={this.state.userSubmitTitle}
-                                                placeholder="Name Your List"
-                                            />
-                                            <label htmlFor="userListTitle"></label>
-                                            <input
-                                                type="submit"
-                                                value="Submit List"
-                                            />
-                                        </form>
-                                        {this.state.isEmptyList ? (
+                                    <form
+                                        className="listCreatorForm"
+                                        action=""
+                                        onSubmit={this.submitList}>
+                                        <input
+                                            id="userListTitle"
+                                            onChange={this.handleSubmitChange}
+                                            type="text"
+                                            value={this.state.userSubmitTitle}
+                                            placeholder="Name Your List"
+                                        />
+                                        <label htmlFor="userListTitle"></label>
+                                        <input
+                                            type="submit"
+                                            value="Submit List"
+                                        />
+                                    </form>
+                                    {this.state.isEmptyList ? (
                                         <div className="emptyList">
                                             <p>You have not added any TV shows to your list yet.</p>
                                             <p>Browse TV Shows by clicking on the titles and add to your list</p>
-                                        </div>) : null}
-
-                                        <div className="userWrapper">
-                                            <UserList
-                                                showTitle={this.state.userTvShows}
-                                                removeShow={this.removeShow}
-                                            />
-                                        </div>
+                                        </div>) : null
+                                    }
+                                    <div className="userWrapper">
+                                        <UserList
+                                            showTitle={this.state.userTvShows}
+                                            removeShow={this.removeShow}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                        ) : <button className="startCreator" onClick={this.openListCreator}>Click here to Build Your List</button>}
-                    </div>
+                        </div>) : 
+                        <button className="startCreator" onClick={this.openListCreator}>Click here to Build Your List</button>
+                    }
+                </div>
             </header>
         )
     }

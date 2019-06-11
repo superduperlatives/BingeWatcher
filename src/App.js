@@ -5,17 +5,11 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 
 class App extends Component {
-  constructor() {
-    super();
-    
-  }
-
   render() {
     return (
       <div className="App">
         <Header />
         <Main />
-
         <Footer />
       </div>
     );
@@ -23,6 +17,4 @@ class App extends Component {
 }
 
 export default App;
-
-
 
