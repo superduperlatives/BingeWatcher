@@ -366,7 +366,7 @@ input[type=text]:active {
 
 .listCreatorForm input[type=submit] {
   box-shadow: 2.5px 2.5px 5px #404040;
-  width: 10%;
+  width: 20%;
 }
 
 .showSelection {
@@ -389,7 +389,7 @@ input[type=text]:active {
   /* border-radius: 10px; */
   margin: 5px;
   padding: 2px;
-  width: 49%;
+  width: 48%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -547,7 +547,8 @@ button.downvote {
 
 button.upvote:hover,
 button.downvote:hover {
-  color: red;
+  transform: scale(1.25);
+  transition: all .5s;
 }
 
 /* =============================================== */
@@ -637,6 +638,60 @@ a:active {
   .searchForm input[type=submit] {
     width: 30%;
   }
+}
 
-  
+@media (max-width: 800px) {
+  .appInfo h1 {
+    font-size: 3.2rem;
+  }
+
+  .startCreator {
+    width: 50%;
+  }
+
+  .completeList {
+    width: 100%;
+  }
+}
+
+@media (max-width: 730px) {
+  .appInfo h1 {
+    font-size: 2rem;
+  }
+
+  .showSelection li{
+    width: 100%;
+  }
+
+  .listCreatorForm input[type=text] {
+    width: 60%;
+  }
+
+  .listCreatorForm input[type=submit] {
+    width: 40%;
+  }
+
+}
+
+@media (max-width: 440px) {
+  .appInfo h1 {
+    font-size: 2rem;
+  }
+
+  .showSelection li{
+    width: 100%;
+  }
+
+  .listCreatorForm {
+    flex-direction: column;
+  }
+
+  .listCreatorForm input[type=text] {
+    width: 100%;
+  }
+
+  .listCreatorForm input[type=submit] {
+    width: 100%;
+  }
+
 }
