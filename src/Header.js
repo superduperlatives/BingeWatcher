@@ -7,22 +7,20 @@ import swal from 'sweetalert';
 class UserList extends Component {
     render(){
         return(
-            <div className="selectedTitles">
-                <ul className="showSelection">
-                    {/* go into showTitle... map over it... for every show... add an index...? */}
-                    {this.props.showTitle.map((show, index) => {
-                        return (
-                            <li key={index}>
-                                <p>{show.title}</p>
-                                <button 
-                                    className="remove" 
-                                    onClick={()=> this.props.removeShow(index)}>Remove
-                                </button>
-                            </li>                        
-                        )
-                    })}
-                </ul>
-            </div>
+            <ul className="showSelection">
+                {/* go into showTitle... map over it... for every show... add an index...? */}
+                {this.props.showTitle.map((show, index) => {
+                    return (
+                        <li key={index}>
+                            <p>{show.title}</p>
+                            <button 
+                                className="removeButton"
+                                onClick={()=> this.props.removeShow(index)}>
+                            </button>
+                        </li>                        
+                    )
+                })}
+            </ul>
         )
     }
 }
@@ -49,6 +47,11 @@ class Header extends Component {
             idArray: [],
 
             isListCreatorShown: false,
+            
+            isEmptyList: true,
+
+            isSubmittedShown: false
+
         }
     }
     
@@ -95,7 +98,6 @@ class Header extends Component {
 
     handleSearch = event => {
         event.preventDefault();
-
         if (this.state.userInput === '') {
             swal({
                 title: "Don't leave the text field empty!!",
@@ -182,6 +184,14 @@ class Header extends Component {
         })
     }
 
+    openListCreator = (e) => {
+        e.preventDefault();
+        this.setState({
+            isListCreatorShown: true
+        })
+    }
+
+
 addToList = (e) => {
 	e.preventDefault();
 
@@ -189,14 +199,15 @@ addToList = (e) => {
 
 		const idArrayCopy = [...this.state.idArray]
 
-		if (!idArrayCopy.includes(this.state.showsInfo.id)) {
-			idArrayCopy.push(this.state.showsInfo.id)
+		// if (!idArrayCopy.includes(this.state.showsInfo.id)) {
+		// 	idArrayCopy.push(this.state.showsInfo.id)
 
 			const showTitle = this.state.showsInfo.title
-			const showValue = 1
+            const showValue = 1
+            const showBackground = this.state.showsInfo.image
 
 			// we're grabbing shit from showTitle & showValue and shoving it into variable info
-			const info = { title: showTitle, value: showValue }
+			const info = { title: showTitle, value: showValue, background: showBackground }
 			// copy of userTVshows to update
 			const titleArray = [...this.state.userTvShows]
 
@@ -204,17 +215,21 @@ addToList = (e) => {
 
 			this.setState({
 				userTvShows: titleArray,
-				idArray: idArrayCopy
+                idArray: idArrayCopy,
+                isListCreatorShown: true,
+                isEmptyList: false
 			})
 
-			console.log(this.state.idArray)
-		} else {
-            swal({
-                title: "You can only have the show once in your list",
-                icon: "warning",
-                button: "Nice.",
-            });
-		}            
+            console.log(this.state.idArray)
+    
+   
+		// } else {
+        //     swal({
+        //         title: "You can only have the show once in your list",
+        //         icon: "warning",
+        //         button: "Nice.",
+        //     });
+		// }            
 
 
 	} else {
@@ -248,9 +263,7 @@ addToList = (e) => {
     submitList = (e) => {
         e.preventDefault()
 
-        console.log(this.state.userTvShows)
-
-        if (this.state.userTvShows.length != 0) {
+        if (this.state.userTvShows.length != 0 && this.state.userSubmitTitle != '') {
             const userChosenTitle = this.state.userSubmitTitle;
 
             // taking the entire list and title 
@@ -267,16 +280,17 @@ addToList = (e) => {
 
             // clear the array for next list 
             this.setState({
-                userTvShows: []
+                userTvShows: [],
+                userSubmitTitle: '',
+                isSubmittedShown: true,
             })
         } else {
             swal({
-                title: "Add at least one show",
+                title: "Whoops! Looks like you didn't complete your list! Make sure to add at least one TV show and name your list.",
                 icon: "warning",
-                button: "Nice.",
-            });
+                button: "Nice."
+            }); 
         }
-
     }
 
     render () {
@@ -311,7 +325,8 @@ addToList = (e) => {
                         <input  
                             id="searchBar" 
                             onChange={this.handleChange}
-                            type="text">
+                            type="text"
+                            placeholder="Search">
                         </input>
                         <input 
                             onClick={this.handleSearch}
@@ -320,9 +335,6 @@ addToList = (e) => {
                         />
                     </form>
                 </div>
-                <h1>
-
-                </h1>
                 <div className="showLists">
                     <div className="showResults">
                         <Slider {...settings} >
@@ -346,10 +358,9 @@ addToList = (e) => {
                         </Slider>
                     </div>
                 </div>
-                <div className="listCreator">
+                
+                {this.state.isModalShown ? (
                     <div className="modalWrapper">
-                    {/* this is where we are going to append the modal on click? */}
-                    {this.state.isModalShown ? (
                         <div className="showModal">
                             <div className="modalImage">
                                 <img
@@ -374,34 +385,61 @@ addToList = (e) => {
                                 </div>
                             </div>
                         </div>
-                    ) : null
-                    }
                     </div>
-                    <div className="listWrapper">
-                        <div className="userWrapper">
-                            <UserList
-                            showTitle={this.state.userTvShows}
-                            removeShow={this.removeShow}
-                            />
-                            <div className="formWrapper">
-                                <form 
-                                    action="" 
+                ) : null
+                }
+
+                {this.state.isListCreatorShown ? (
+                    <div className="listCreator">
+                        {/* this is where we are going to append the modal on click? */}
+
+                        <div className="listWrapper">
+                            <div className="formWrapper" id="formWrapper">
+                                <form
+                                    className="listCreatorForm"
+                                    action=""
                                     onSubmit={this.submitList}>
-                                <label htmlFor="userListTitle"></label>
-                                <input
-                                    id="userListTitle"
-                                    onChange={this.handleSubmitChange}
-                                    type="text"
-                                />
-                                <input
-                                    type="submit"
-                                    value="Submit List"
-                                />
+                                    <input
+                                        id="userListTitle"
+                                        onChange={this.handleSubmitChange}
+                                        type="text"
+                                        value={this.state.userSubmitTitle}
+                                        placeholder="Name Your List"
+                                    />
+                                    <label htmlFor="userListTitle"></label>
+                                    <input
+                                        type="submit"
+                                        value="Submit List"
+                                        onClick={this.submitList}
+                                    />
                                 </form>
+
+                                {this.state.isEmptyList ? (
+                                <div className="emptyList">
+                                    <p>You have not added any TV shows to your list yet.</p>
+                                    <p>Browse TV Shows by clicking on the titles and add to your list</p>
+                                </div>) : null
+                                }
+
+                                {this.state.isSubmittedShown ? (
+                                    <div className="submittedListMessage">
+                                        <p>Thank you for submitting your list!
+                                            Vote for your favorite shows on our community boards below!
+                                        </p>
+                                    </div>) : null
+                                }
+
+                                <div className="userWrapper">
+                                    <UserList
+                                        showTitle={this.state.userTvShows}
+                                        removeShow={this.removeShow}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                ) : <button className="startCreator" onClick={this.openListCreator}>Click here to Build Your List</button>}
             </header>
         )
     }

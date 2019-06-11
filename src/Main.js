@@ -176,9 +176,9 @@ class Main extends Component {
 
     render(){
         return(
-            <section className="communityListSection">
+            <section className="communityList wrapper" id="communityList">
                 <h2 className="communityListTitle">Community Lists</h2>
-                <div className="communityList">
+                <div className="communityListContent">
                     {this.state.displayList.map((list, index) => {
                         return(
                             <div 
@@ -190,20 +190,29 @@ class Main extends Component {
                                 <ul>
                                     {list.userListObject.userList.map((show, index)=> {
                                         return(
-                                            <li key={index} className="showTitleAndVote">
-                                                <h4>{show.title}</h4>
-                                                <div className="votesAndButtons">
+                                            <li 
+                                            key={index} 
+                                            className="titleVoteContent">
+                                                <div 
+                                                className="showHeading"
+                                                style={{backgroundImage: `url(${show.background})`}}>
+                                                    <h4>{show.title}</h4>
+                                                    <div className="overlay"></div>
+                                                </div>
+                                                <div className="showRating">
                                                     <p>{show.value}</p>
-                                                    <div className="votesButtons">
+                                                    <div className="votesButton">
                                                         <button
                                                             className="upvote"
                                                             onClick={this.valueIncrease}
-                                                            value={index}>&#10759;
+                                                            value={index}>
+                                                                +
                                                         </button>
                                                         <button
                                                             className="downvote"
                                                             onClick={this.valueDecrease}
-                                                            value={index}>&#10760;
+                                                            value={index}>
+                                                                -
                                                         </button>
                                                     </div>
                                                 </div>
