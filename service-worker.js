@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/BingeWatcher/precache-manifest.90ff3c8e6ab3c4dee54d36ebaa0f92f9.js"
+  "/BingeWatcher/precache-manifest.791d19c31faa847ff5b505d450a535e7.js"
 );
 
 self.addEventListener('message', (event) => {

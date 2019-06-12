@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/BingeWatcher/static/css/main.370cdbaf.chunk.css",
+    "main.css": "/BingeWatcher/static/css/main.49bddcaf.chunk.css",
     "main.js": "/BingeWatcher/static/js/main.49032f04.chunk.js",
     "main.js.map": "/BingeWatcher/static/js/main.49032f04.chunk.js.map",
     "runtime~main.js": "/BingeWatcher/static/js/runtime~main.a908e685.js",
@@ -8,9 +8,9 @@
     "static/js/2.b22313a2.chunk.js": "/BingeWatcher/static/js/2.b22313a2.chunk.js",
     "static/js/2.b22313a2.chunk.js.map": "/BingeWatcher/static/js/2.b22313a2.chunk.js.map",
     "index.html": "/BingeWatcher/index.html",
-    "precache-manifest.90ff3c8e6ab3c4dee54d36ebaa0f92f9.js": "/BingeWatcher/precache-manifest.90ff3c8e6ab3c4dee54d36ebaa0f92f9.js",
+    "precache-manifest.791d19c31faa847ff5b505d450a535e7.js": "/BingeWatcher/precache-manifest.791d19c31faa847ff5b505d450a535e7.js",
     "service-worker.js": "/BingeWatcher/service-worker.js",
-    "static/css/main.370cdbaf.chunk.css.map": "/BingeWatcher/static/css/main.370cdbaf.chunk.css.map",
+    "static/css/main.49bddcaf.chunk.css.map": "/BingeWatcher/static/css/main.49bddcaf.chunk.css.map",
     "static/media/App.css": "/BingeWatcher/static/media/tvPosterCollageTwoMin.c9fd57d2.jpg"
   }
 }
