@@ -341,7 +341,7 @@ class Header extends Component {
                         </div>
                         
                         <form action="" className="searchForm">
-                            <label htmlFor="searchBar"></label>
+                            <label htmlFor="searchBar" className="visuallyHidden">Search for TV shows</label>
                             <input  
                                 id="searchBar" 
                                 onChange={this.handleChange}
@@ -400,7 +400,7 @@ class Header extends Component {
                                             <button
                                                 className="clickClose"
                                                 onClick={this.closeModal}>
-                                                X
+                                                &#xd7;
                                             </button>
                                         </div>
                                     </div>
@@ -424,7 +424,7 @@ class Header extends Component {
                                             value={this.state.userSubmitTitle}
                                             placeholder="Name Your List"
                                         />
-                                        <label htmlFor="userListTitle"></label>
+                                        <label htmlFor="userListTitle" className="visuallyHidden">Name your TV show list</label>
                                         <input
                                             type="submit"
                                             value="Submit List"
