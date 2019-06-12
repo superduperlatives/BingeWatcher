@@ -580,7 +580,9 @@ button.downvote {
 }
 
 button.upvote:hover,
-button.downvote:hover {
+button.downvote:hover,
+button.upvote:focus,
+button.downvote:focus {
   transform: scale(1.25);
   transition: all .5s;
 }
