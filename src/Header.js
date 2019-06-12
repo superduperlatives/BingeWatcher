@@ -341,7 +341,7 @@ class Header extends Component {
                 }
 
                 <div className="heroContent">
-                    <div className="headerSearchBar">
+                    <div className="headerSearchBar animated fadeInUp">
                         <div className="appInfo">
                             <h1>Binge Watchers</h1>
                             <p className="slogan">Make a TV show list for your next binge</p>
@@ -388,7 +388,7 @@ class Header extends Component {
                     {this.state.isModalShown ? (
                         <FocusTrap>
                             <div className="modalWrapper">
-                                <div className="showModal">
+                                <div className="showModal animated fadeIn">
                                     <div className="modalImage">
                                         <img
                                             src={this.state.showsInfo.image}
