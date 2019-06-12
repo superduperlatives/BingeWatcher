@@ -266,10 +266,10 @@ input[type=text] {
 .showModal {
   background-color:rgba(13, 192, 176, 0.85);
   border-radius: 10px;
-  margin: 2% auto;
+  margin: 7.5% auto;
   padding: 2.5%;
   position: relative;
-  width: 60%;
+  width: 80%;
   z-index: 1000;
 }
 
