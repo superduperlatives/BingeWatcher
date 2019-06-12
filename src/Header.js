@@ -272,7 +272,7 @@ class Header extends Component {
     submitList = (e) => {
         e.preventDefault()
         // error handling - checks if user has added more than one TV show and entered a titled
-        if (this.state.userTvShows.length != 0 && this.state.userSubmitTitle != '') {
+        if (this.state.userTvShows.length !== 0 && this.state.userSubmitTitle !== '') {
             const userChosenTitle = this.state.userSubmitTitle;
 
             // takes user's entire list of TV shows and list title 

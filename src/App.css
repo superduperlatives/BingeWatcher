@@ -67,6 +67,10 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 html {
   font-family: 'Lato', sans-serif; 
   font-size: 125%;
@@ -271,7 +275,8 @@ input[type=text] {
 }
 
 .showModal {
-  background-color: #CDD9D9;
+  background-color:rgba(13, 192, 176, 0.85);
+  border-radius: 10px;
   margin: 2% auto;
   padding: 2.5%;
   position: relative;
@@ -291,27 +296,37 @@ input[type=text] {
   width: 100%;
 }
 
-.clickClose,
-.clickClose:hover {
+.clickClose {
+  background: none;
+  font-size: 4rem;
+  top: 1%;
+  right: 1%;
+  position: absolute;
+  line-height: 0.5;
   transition: all ease-in .5s;
 }
 
-.clickClose {
-  background: none;
-  color: #0DC0B0;
-  font-size: 1.2rem;
-  /* fix X button */
-  top: 2.5%;
-  right: 2.5%;
-  position: absolute;
+.clickClose:hover, 
+.clickClose:active, 
+.clickClose:focus{
+  background:none;
+  border:none;
+  color: #cdd9d9;
 }
 
-.clickClose:hover {
-  transform: scale(1.5);
-}
+
 
 .clickAdd {
+  background-color: #cdd9d9;
+  box-shadow: 2.5px 2.5px 5px #404040;
   padding: 2%;
+}
+
+.clickAdd:active, 
+.clickAdd:focus,
+.clickAdd:hover {
+  background-color:#fefefe;
+  transform: scale(1.1);
 }
 
 .modalButtons,
@@ -419,6 +434,8 @@ input[type=text] {
   justify-content: space-between;
   align-items: center;
   transition: background 0.5s ease;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .showSelection li:hover {
@@ -439,7 +456,7 @@ input[type=text] {
 }
 
 /* =============================================== */
-/* Community */
+/* Community Lists */
 /* =============================================== */
 /* community common/ similar styling */
 .communityListContent,
@@ -608,10 +625,6 @@ button.downvote:hover {
   margin-left: .5rem;
 }
 
-a {
-  text-decoration: none;
-}
-
 a:link,
 a:visited {
   color: #cdd9d9;
@@ -670,6 +683,11 @@ a:active {
     font-size: 3.2rem;
   }
 
+  .appInfo {
+    width: 100%;
+    text-align: center;
+  }
+
   .startCreator {
     width: 50%;
   }
@@ -715,6 +733,32 @@ a:active {
     width: 75%;
   }
 
+  .showModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1050;
+  }
+
+  .modalImage {
+    width: 60%;
+  }
+
+  .modalText h2 {
+    font-size: 1.2rem;
+  }
+
+  .modalText p {
+    height: 100px;
+    font-size: 0.75rem;
+  }
+
+  .modalButtons {
+    display: flex;
+    flex-direction: column;
+  }
+
   .slick-next:before,
   .slick-prev:before,
   .slick-next,
@@ -725,6 +769,10 @@ a:active {
 }
 
 @media (max-width: 440px) {
+  .wrapper {
+    padding: 0 5%;
+  }
+
   .appInfo h1 {
     font-size: 2rem;
   }
@@ -745,4 +793,11 @@ a:active {
     width: 100%;
   }
 
+  .showHeading {
+    width: 65%;
+  }
+
+  .showRating {
+    width: 35%;
+  }
 }
