@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b6db738ef3971bb1e76c14faa9accac7",
+    "revision": "37e9daf9704a1c651b186a5adb6b805b",
     "url": "/BingeWatcher/index.html"
   },
   {
-    "revision": "96b31f53787ceb2b3a41",
+    "revision": "06e4cd24bdb93346a4d9",
     "url": "/BingeWatcher/static/css/main.49bddcaf.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/BingeWatcher/static/js/2.b22313a2.chunk.js"
   },
   {
-    "revision": "96b31f53787ceb2b3a41",
-    "url": "/BingeWatcher/static/js/main.49032f04.chunk.js"
+    "revision": "06e4cd24bdb93346a4d9",
+    "url": "/BingeWatcher/static/js/main.a0cbc19f.chunk.js"
   },
   {
     "revision": "319c45030e70e3a9a390",
