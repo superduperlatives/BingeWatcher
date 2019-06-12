@@ -317,6 +317,7 @@ input[type=text] {
 
 
 .clickAdd {
+  border-radius: 10px;
   background-color: #cdd9d9;
   box-shadow: 2.5px 2.5px 5px #404040;
   padding: 2%;
@@ -345,8 +346,7 @@ input[type=text] {
 /* List Creator */
 /* =============================================== */
 .listCreatorForm,
-.showSelection,
-.showSelection li{
+.showSelection {
   display: flex;
 }
 
@@ -356,12 +356,15 @@ input[type=text] {
   margin: 0% auto;
 }
 
+.showSelection {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .listCreatorForm input[type=text],
 .listCreatorForm input[type=submit] {
   box-shadow: 2.5px 2.5px 5px #404040;
 }
-
 
 .listWrapper {
   background-color: rgba(205, 217, 217, .5);
@@ -411,26 +414,32 @@ input[type=text] {
   width: 20%;
 }
 
-.showSelection {
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 100px;
-  justify-content: space-between;
-  width: 100%;
+.titleVoteContent {
+  display: flex;
 }
 
+.titleVoteContent {
+  justify-content: space-between;
+}
+
+.titleVoteContent {
+  box-shadow: 2.5px 2.5px 5px #404040;
+}
+
+.titleVoteContent h4,
+.titleVoteContent {
+  transition: all ease-in-out .5s;
+}
+
+
 /* retune this to the same as the community list. */
-.showSelection li{
+/* .showSelection li{
   font-family: 'Fjalla One', sans-serif;
-  font-size: 1.2rem;
-  display:block;
-  background-color:#141414;
-  color: #cdd9d9;
-  border: 1px solid #fefefe;
-  margin: 5px;
-  padding: 2px;
-  width: 48%;
+  font-size: 1.5rem;
+  color: #CDD9D9;
   flex-direction: row;
+}  */
+/* 
   justify-content: space-between;
   align-items: center;
   transition: background 0.5s ease;
@@ -441,18 +450,26 @@ input[type=text] {
 .showSelection li:hover {
   color:#141414;
   background-color:#CDD9D9;
+} */
+
+.removeWrapper {
+  display: flex;
+  width: 10%;
+  z-index: 2000;
 }
 
 .removeButton {
-  background: url(./assets/removeTrashCan.png) center/ contain no-repeat;
+  color: #CDD9D9;
+  background: none;
+  font-size: 2.5rem;
+  /* background: url(./assets/removeTrashCan.png) center/ contain no-repeat; */
   padding: 2%;
-  margin: 1%;
 }
 
 .removeButton:hover,
 .removeButton:active,
 .removeButton:focus {
-  background: url(./assets/removeTrashCanBlack.png) center/ contain no-repeat;
+  background: none;
 }
 
 /* =============================================== */
@@ -462,6 +479,7 @@ input[type=text] {
 .communityListContent,
 .completeList,
 .titleVoteContent,
+.titleVoteContent2,
 .showRating,
 .votesButton {
   display: flex;
@@ -469,17 +487,20 @@ input[type=text] {
 
 .communityListContent,
 .titleVoteContent,
+.titleVoteContent2,
 .votesButton {
   justify-content: space-between;
 }
 
 .completeList,
-.titleVoteContent {
+.titleVoteContent,
+.titleVoteContent2 {
   box-shadow: 2.5px 2.5px 5px #404040;
 }
 
 .titleVoteContent h4,
-.titleVoteContent {
+.titleVoteContent
+.titleVoteContent2 {
   transition: all ease-in-out .5s;
 }
 
@@ -505,7 +526,8 @@ input[type=text] {
 }
 
 .completeList h3,
-.titleVoteContent h4 {
+.titleVoteContent h4,
+.titleVoteContent2 h4 {
   text-transform: uppercase;
 }
 
@@ -513,14 +535,16 @@ input[type=text] {
   font-size: 1.4rem;
 }
 
-.titleVoteContent h4 {
-  color: #FAFAFA;
+.titleVoteContent h4,
+.titleVoteContent2 h4 {
+  color: #CDD9D9;
   font-size: .9rem;
   padding: 10% 5%;
   position: relative;
   z-index: 1000;
 }
 
+.titleVoteContent h4:hover,
 .titleVoteContent h4:hover {
   color: #0DC0B0;
 }
@@ -534,10 +558,20 @@ input[type=text] {
 .titleVoteContent {
   align-items: center;
   display: flex;
-  margin: 2.5% 0%;
+  margin: 1% 0%;
 }
 
-.titleVoteContent:hover {
+
+.titleVoteContent2 {
+  background-position: center center;
+  background-size: cover;
+  margin: 2.5% 0%;
+  position: relative;
+  width: 32.5%;
+}
+
+.titleVoteContent:hover,
+.titleVoteContent2.completeList  {
   background-color: #0DC0B0;
 }
 
@@ -557,13 +591,15 @@ input[type=text] {
   left: 0;
 }
 
-.showRating {
+.showRating,
+.showRating2 {
   flex-direction: row;
   justify-content: space-evenly;
   width: 25%;
 }
 
-.showRating p {
+.showRating p,
+.showRating2 p {
   font-size: 1.25rem;
   font-weight: 700;
   padding: 5% 0;
