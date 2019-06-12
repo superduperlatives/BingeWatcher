@@ -228,7 +228,7 @@ class Header extends Component {
                 });
 
                 swal({
-                    title: "Whoops you already this show to your list!",
+                    title: "Whoops you already added this show to your list!",
                     icon: "warning",
                     button: "Nice.",
                 });
@@ -254,10 +254,17 @@ class Header extends Component {
 
         // remove the TV show from the array
         showTitle.splice(showToRemove, 1)
+
+        
+        const idArrayCopy = [...this.state.idArray]
+        
+        // remove the TV show from the idArray
+        idArrayCopy.splice(showToRemove, 1)
         
         // update state with the new array
         this.setState ({
-            userTvShows: showTitle
+            userTvShows: showTitle,
+            idArray: idArrayCopy
         })
     }
 
