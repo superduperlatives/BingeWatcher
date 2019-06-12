@@ -435,7 +435,9 @@ input[type=text] {
 .removeButton:active,
 .removeButton:focus {
   background: none;
+  color: #0DC0B0;
 }
+
 
 /* =============================================== */
 /* Community Lists */
@@ -533,6 +535,7 @@ input[type=text] {
   margin: 2.5% 0%;
   position: relative;
   width: 32.5%;
+  border-radius: 5px;
 }
 
 .titleVoteContent:hover,
@@ -602,7 +605,7 @@ button.downvote:focus {
   background: linear-gradient(rgba(18, 49, 129, .9), rgba(0, 0, 0, .7)), url(./assets/tvPosterCollageTwoMin.jpg) no-repeat fixed;
   background-size: cover;
   background-position: center;
-  padding: .2rem 0;
+  padding: 1.5% 0;
   color: #CDD9D9;
   font-size: .8rem;
 }
@@ -731,6 +734,10 @@ a:active {
 }
 
 @media (max-width: 600px) {
+  .listWrapper {
+    margin: 7% 0;
+  }
+  
   .startCreator {
     margin-top: 10%;
     width: 75%;
