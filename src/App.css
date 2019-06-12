@@ -317,12 +317,9 @@ input[type=text] {
 
 
 .clickAdd {
-<<<<<<< HEAD
   border-radius: 10px;
-=======
   background-color: #cdd9d9;
   box-shadow: 2.5px 2.5px 5px #404040;
->>>>>>> master
   padding: 2%;
 }
 
@@ -441,10 +438,8 @@ input[type=text] {
   font-size: 1.5rem;
   color: #CDD9D9;
   flex-direction: row;
-<<<<<<< HEAD
 }  */
 /* 
-=======
   justify-content: space-between;
   align-items: center;
   transition: background 0.5s ease;
@@ -452,7 +447,6 @@ input[type=text] {
   background-size: cover;
 }
 
->>>>>>> master
 .showSelection li:hover {
   color:#141414;
   background-color:#CDD9D9;
