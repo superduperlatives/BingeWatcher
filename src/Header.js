@@ -343,8 +343,8 @@ class Header extends Component {
                 <div className="heroContent">
                     <div className="headerSearchBar animated fadeInUp">
                         <div className="appInfo">
-                            <h1>Binge Watchers</h1>
-                            <p className="slogan">Make a TV show list for your next binge</p>
+                            <h1>TV Watchers</h1>
+                            <p className="slogan">Make a TV show list for your next TV marathon</p>
                         </div>
                         
                         <form action="" className="searchForm">
